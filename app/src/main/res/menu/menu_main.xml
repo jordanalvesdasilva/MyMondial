@@ -10,4 +10,9 @@
     <item
         android:orderInCategory="101"
         android:title="Item" />
+    <item
+        android:id="@+id/app_bar_switch"
+        android:orderInCategory="102"
+        android:title="Switch"
+        app:actionLayout="@layout/switch_item" />
 </menu>
