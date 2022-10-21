@@ -2,6 +2,13 @@ package com.example.mymondial;
 
 import android.os.Bundle;
 
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +25,10 @@ import com.example.mymondial.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
@@ -26,6 +37,45 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+    // Permet de pouvoir récupérer su l'API des informations (ici nom des joueurs allemand)
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://app.sportdataapi.com/api/v1/soccer/players?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&country_id=48";
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        System.out.println("Response is: " + response.substring(0,500));
+                        try {
+                            JSONObject jObject = new JSONObject(response);
+                            JSONArray data = jObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                String firstname = data.getJSONObject(i).getString("firstname");
+                                String lastname = data.getJSONObject(i).getString("lastname");
+                                System.out.println(firstname +" " + lastname);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("That didn't work!");
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+    // Fin de la récupération
+
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
