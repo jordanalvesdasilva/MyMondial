@@ -19,20 +19,23 @@
             app:titleMarginStart="24dp"
             app:titleTextColor="@color/black" />
 
-        <TextView
-            android:id="@+id/DIRECT"
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbar"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
-            android:text="DIRECT"
             android:textSize="30dp"/>
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/DIRECT"
+            android:layout_below="@id/spinner"
             android:layout_marginTop="30dp"
-            android:id="@+id/match_live" />
+            android:id="@+id/match_live"
+            android:divider="@color/white"
+            android:listSelector="#6FB6D6"
+            android:dividerHeight="1px" />
+
 </RelativeLayout>
