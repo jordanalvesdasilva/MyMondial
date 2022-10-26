@@ -31,12 +31,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
     private ListView MatchListview;
     private ArrayList<String> HomeTeam = new ArrayList<String>();
     private ArrayList<String> AwayTeam = new ArrayList<String>() ;
     private ArrayList<String> Score = new ArrayList<String>();
     private ArrayList<String> Time = new ArrayList<String>();
+    private ArrayList<Integer> HomeTeamFlag = new ArrayList<Integer>();
+    private ArrayList<Integer> AwayTeamFlag = new ArrayList<Integer>();
+    private int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // REQUEST API FOR MATCH
         RequestQueue queue = Volley.newRequestQueue(this);
         MatchListview = (ListView) findViewById(R.id.match_live);
-        Match_adapter match_adapter = new Match_adapter(getApplicationContext(),HomeTeam, AwayTeam, Score, Time );
+        Match_adapter match_adapter = new Match_adapter(getApplicationContext(),HomeTeam, AwayTeam, Score, Time, HomeTeamFlag, AwayTeamFlag );
         //String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=1243";  //LDC
         String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -70,193 +72,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             System.out.println("Response is: " + response.substring(0, 500));
                             switch (current_day) {
                                 case "Journée 1":
-                                    HomeTeam.clear();
-                                    AwayTeam.clear();
-                                    Score.clear();
-                                    Time.clear();
-                                    for (int i = 0; i < 16; i++) {
-                                        if (data.getJSONObject(i).getJSONObject("home_team").has("name")) {
-                                            HomeTeam.add(data.getJSONObject(i).getJSONObject("home_team").getString("name"));
-                                            AwayTeam.add(data.getJSONObject(i).getJSONObject("away_team").getString("name"));
-                                        } else {
-                                            HomeTeam.add("not found");
-                                            AwayTeam.add("not found");
-                                        }
-                                        if (data.getJSONObject(i).getJSONObject("stats").getString("ft_score") == "null") {
-                                            Score.add("  -  ");
-                                        } else {
-                                            Score.add(data.getJSONObject(i).getJSONObject("stats").getString("ft_score"));
-                                        }
-                                        if ((data.getJSONObject(i).getString("status").equals("notstarted"))) {
-                                            Time.add("");
-                                        } else if (data.getJSONObject(i).getString("status").equals("finished")) {
-                                            Time.add("TER");
-                                        } else {
-                                            Time.add(data.getJSONObject(i).getString("minute"));
-                                        }
-                                    }
+                                    Parse(0,16,data);
                                     break;
                                 case "Journée 2":
-                                    HomeTeam.clear();
-                                    AwayTeam.clear();
-                                    Score.clear();
-                                    Time.clear();
-                                    for (int i = 16; i < 32; i++) {
-                                        if (data.getJSONObject(i).getJSONObject("home_team").has("name")) {
-                                            HomeTeam.add(data.getJSONObject(i).getJSONObject("home_team").getString("name"));
-                                            AwayTeam.add(data.getJSONObject(i).getJSONObject("away_team").getString("name"));
-                                        } else {
-                                            HomeTeam.add("not found");
-                                            AwayTeam.add("not found");
-                                        }
-                                        if (data.getJSONObject(i).getJSONObject("stats").getString("ft_score") == "null") {
-                                            Score.add("  -  ");
-                                        } else {
-                                            Score.add(data.getJSONObject(i).getJSONObject("stats").getString("ft_score"));
-                                        }
-                                        if ((data.getJSONObject(i).getString("status").equals("notstarted"))) {
-                                            Time.add("");
-                                        } else if (data.getJSONObject(i).getString("status").equals("finished")) {
-                                            Time.add("TER");
-                                        } else {
-                                            Time.add(data.getJSONObject(i).getString("minute"));
-                                        }
-                                    }
+                                    Parse(16,32,data);
                                     break;
                                 case "Journée 3":
-                                    HomeTeam.clear();
-                                    AwayTeam.clear();
-                                    Score.clear();
-                                    Time.clear();
-                                    for (int i = 32; i < 48; i++) {
-                                        if (data.getJSONObject(i).getJSONObject("home_team").has("name")) {
-                                            HomeTeam.add(data.getJSONObject(i).getJSONObject("home_team").getString("name"));
-                                            AwayTeam.add(data.getJSONObject(i).getJSONObject("away_team").getString("name"));
-                                        } else {
-                                            HomeTeam.add("not found");
-                                            AwayTeam.add("not found");
-                                        }
-                                        if (data.getJSONObject(i).getJSONObject("stats").getString("ft_score") == "null") {
-                                            Score.add("  -  ");
-                                        } else {
-                                            Score.add(data.getJSONObject(i).getJSONObject("stats").getString("ft_score"));
-                                        }
-                                        if ((data.getJSONObject(i).getString("status").equals("notstarted"))) {
-                                            Time.add("");
-                                        } else if (data.getJSONObject(i).getString("status").equals("finished")) {
-                                            Time.add("TER");
-                                        } else {
-                                            Time.add(data.getJSONObject(i).getString("minute"));
-                                        }
-                                    }
+                                    Parse(32,48,data);
                                     break;
                                 case "Huitièmes de finale":
-                                    HomeTeam.clear();
-                                    AwayTeam.clear();
-                                    Score.clear();
-                                    Time.clear();
-                                    for (int i = 48; i < 57; i++) {
-                                        if (data.getJSONObject(i).getJSONObject("home_team").has("name")) {
-                                            HomeTeam.add(data.getJSONObject(i).getJSONObject("home_team").getString("name"));
-                                            AwayTeam.add(data.getJSONObject(i).getJSONObject("away_team").getString("name"));
-                                        } else {
-                                            HomeTeam.add("not found");
-                                            AwayTeam.add("not found");
-                                        }
-                                        if (data.getJSONObject(i).getJSONObject("stats").getString("ft_score") == "null") {
-                                            Score.add("  -  ");
-                                        } else {
-                                            Score.add(data.getJSONObject(i).getJSONObject("stats").getString("ft_score"));
-                                        }
-                                        if ((data.getJSONObject(i).getString("status").equals("notstarted"))) {
-                                            Time.add("");
-                                        } else if (data.getJSONObject(i).getString("status").equals("finished")) {
-                                            Time.add("TER");
-                                        } else {
-                                            Time.add(data.getJSONObject(i).getString("minute"));
-                                        }
-                                    }
+                                    Parse(48,57,data);
                                     break;
                                 case "Quarts de finale":
-                                    HomeTeam.clear();
-                                    AwayTeam.clear();
-                                    Score.clear();
-                                    Time.clear();
-                                    for (int i = 57; i < 61; i++) {
-                                        if (data.getJSONObject(i).getJSONObject("home_team").has("name")) {
-                                            HomeTeam.add(data.getJSONObject(i).getJSONObject("home_team").getString("name"));
-                                            AwayTeam.add(data.getJSONObject(i).getJSONObject("away_team").getString("name"));
-                                        } else {
-                                            HomeTeam.add("not found");
-                                            AwayTeam.add("not found");
-                                        }
-                                        if (data.getJSONObject(i).getJSONObject("stats").getString("ft_score") == "null") {
-                                            Score.add("  -  ");
-                                        } else {
-                                            Score.add(data.getJSONObject(i).getJSONObject("stats").getString("ft_score"));
-                                        }
-                                        if ((data.getJSONObject(i).getString("status").equals("notstarted"))) {
-                                            Time.add("");
-                                        } else if (data.getJSONObject(i).getString("status").equals("finished")) {
-                                            Time.add("TER");
-                                        } else {
-                                            Time.add(data.getJSONObject(i).getString("minute"));
-                                        }
-                                    }
+                                    Parse(57,61,data);
                                     break;
                                 case "Demi-finales":
-                                    HomeTeam.clear();
-                                    AwayTeam.clear();
-                                    Score.clear();
-                                    Time.clear();
-                                    for (int i = 61; i < 63; i++) {
-                                        if (data.getJSONObject(i).getJSONObject("home_team").has("name")) {
-                                            HomeTeam.add(data.getJSONObject(i).getJSONObject("home_team").getString("name"));
-                                            AwayTeam.add(data.getJSONObject(i).getJSONObject("away_team").getString("name"));
-                                        } else {
-                                            HomeTeam.add("not found");
-                                            AwayTeam.add("not found");
-                                        }
-                                        if (data.getJSONObject(i).getJSONObject("stats").getString("ft_score") == "null") {
-                                            Score.add("  -  ");
-                                        } else {
-                                            Score.add(data.getJSONObject(i).getJSONObject("stats").getString("ft_score"));
-                                        }
-                                        if ((data.getJSONObject(i).getString("status").equals("notstarted"))) {
-                                            Time.add("");
-                                        } else if (data.getJSONObject(i).getString("status").equals("finished")) {
-                                            Time.add("TER");
-                                        } else {
-                                            Time.add(data.getJSONObject(i).getString("minute"));
-                                        }
-                                    }
+                                    Parse(61,63,data);
                                     break;
                                 case "Finale":
-                                    HomeTeam.clear();
-                                    AwayTeam.clear();
-                                    Score.clear();
-                                    Time.clear();
-                                    if (data.getJSONObject(63).getJSONObject("home_team").has("name")) {
-                                        HomeTeam.add(data.getJSONObject(63).getJSONObject("home_team").getString("name"));
-                                        AwayTeam.add(data.getJSONObject(63).getJSONObject("away_team").getString("name"));
-                                    } else {
-                                        HomeTeam.add("not found");
-                                        AwayTeam.add("not found");
-                                    }
-                                    if (data.getJSONObject(63).getJSONObject("stats").getString("ft_score") == "null") {
-                                        Score.add("  -  ");
-                                    } else {
-                                        Score.add(data.getJSONObject(63).getJSONObject("stats").getString("ft_score"));
-                                    }
-                                    if ((data.getJSONObject(63).getString("status").equals("notstarted"))) {
-                                        Time.add("");
-                                    } else if (data.getJSONObject(63).getString("status").equals("finished")) {
-                                        Time.add("TER");
-                                    } else {
-                                        Time.add(data.getJSONObject(63).getString("minute"));
-                                    }
-
-                            break;
+                                    Parse(63,64,data);
+                                    break;
                         }
 
                         } catch (JSONException e) {
@@ -278,5 +113,114 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    private void Parse(int min, int max, JSONArray data){
+
+        try {
+            HomeTeam.clear();
+            AwayTeam.clear();
+            Score.clear();
+            Time.clear();
+            HomeTeamFlag.clear();
+            AwayTeamFlag.clear();
+            for (int i = min; i <max; i++) {
+                if (data.getJSONObject(i).getJSONObject("home_team").has("name")) {
+                    HomeTeam.add(data.getJSONObject(i).getJSONObject("home_team").getString("name"));
+                    AwayTeam.add(data.getJSONObject(i).getJSONObject("away_team").getString("name"));
+                    HomeTeamFlag.add(ChooseFlag(data.getJSONObject(i).getJSONObject("home_team").getString("name")));
+                    AwayTeamFlag.add(ChooseFlag(data.getJSONObject(i).getJSONObject("away_team").getString("name")));
+                } else {
+                    HomeTeam.add("not found");
+                    AwayTeam.add("not found");
+                }
+                if (data.getJSONObject(i).getJSONObject("stats").getString("ft_score") == "null") {
+                    Score.add("  -  ");
+                } else {
+                    Score.add(data.getJSONObject(i).getJSONObject("stats").getString("ft_score"));
+                }
+                if ((data.getJSONObject(i).getString("status").equals("notstarted"))) {
+                    Time.add(data.getJSONObject(i).getString("match_start"));
+                } else if (data.getJSONObject(i).getString("status").equals("finished")) {
+                    Time.add("TER");
+                } else {
+                    Time.add(data.getJSONObject(i).getString("minute"));
+                }
+            }
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private int ChooseFlag(String name_team){
+        switch (name_team){
+            case "Senegal":
+                return Flag[26];
+            case "Netherlands":
+                return Flag[20];
+            case "England":
+                return Flag[1];
+            case "Iran":
+                return Flag[16];
+            case "Qatar":
+                return Flag[24];
+            case "Ecuador":
+                return Flag[12];
+            case "USA":
+                return Flag[31];
+            case "Wales":
+                return Flag[21];
+            case "Argentina":
+                return Flag[3];
+            case "Saudi Arabia":
+                return Flag[2];
+            case "Denmark":
+                return Flag[11];
+            case "Tunisia":
+                return Flag[29];
+            case "Mexico":
+                return Flag[19];
+            case "Poland":
+                return Flag[22];
+            case "France":
+                return Flag[14];
+            case "Australia":
+                return Flag[4];
+            case "Morocco":
+                return Flag[18];
+            case "Croatia":
+                return Flag[9];
+            case "Germany":
+                return Flag[0];
+            case "Japan":
+                return Flag[17];
+            case "Spain":
+                return Flag[13];
+            case "Costa Rica":
+                return Flag[10];
+            case "Belgium":
+                return Flag[5];
+            case "Canada":
+                return Flag[8];
+            case "Switzerland":
+                return Flag[28];
+            case "Cameroon":
+                return Flag[7];
+            case "Uruguay":
+                return Flag[30];
+            case "Republic of Korea":
+                return Flag[25];
+            case "Portugal":
+                return Flag[23];
+            case "Ghana":
+                return Flag[15];
+            case "Brazil":
+                return Flag[6];
+            case "Serbia":
+                return Flag[27];
+        }
+        return 0;
     }
 }

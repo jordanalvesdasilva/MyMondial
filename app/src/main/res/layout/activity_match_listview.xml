@@ -3,42 +3,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="70dp"
+    android:minHeight="80dp"
     tools:context=".Match_Listview"
-    android:gravity="center_vertical"
     >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test"
-        android:layout_marginLeft="10dp"
-        android:textSize="20dp"
+        android:text="11/11 12:00"
+        android:textSize="15dp"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
         android:id="@+id/Time"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/Result"
-        android:layout_marginRight="10dp"
-        android:text="test"
-        android:textSize="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Brazil"
+        android:textSize="15dp"
         android:id="@+id/HomeTeam"/>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        app:srcCompat="@drawable/allemagne"
+        android:id="@+id/HomeTeamFlag"/>
 
     <TextView
         android:id="@+id/Result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="false"
-        android:text="test"
-        android:textSize="20dp" />
+        android:text="3 - 5"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_centerVertical="true"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_centerHorizontal="true"
         android:layout_toRightOf="@+id/Result"
-        android:text="test"
-        android:textSize="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_centerVertical="true"
+        android:text="Portugal"
+        android:textSize="15dp"
         android:id="@+id/AwayTeam"/>
+
+    <ImageView
+        android:id="@+id/AwayTeamFlag"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        app:srcCompat="@drawable/argentine" />
+
 
 </RelativeLayout>
