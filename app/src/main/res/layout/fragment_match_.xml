@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+   android:layout_height="match_parent"
+    tools:context=".Match_Listview"
+    android:background="#2196F3"
+    >
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#C0C6BC"
+    android:id="@+id/TETE">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11/11 12:00"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/Time"/>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/HomeTeamFlag"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:text="Germany"
+        android:textSize="20dp"
+        android:id="@+id/HomeTeam"/>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        app:srcCompat="@drawable/allemagne"
+        android:id="@+id/HomeTeamFlag"/>
+</RelativeLayout>
+
+    <TextView
+        android:id="@+id/Result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="3 - 5"
+        android:layout_below="@id/Time"
+        android:textStyle="bold"
+        android:textSize="30dp"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/AwayTeamFlag"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:text="Germany"
+            android:textSize="20dp"
+            android:id="@+id/AwayTeam"/>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            app:srcCompat="@drawable/allemagne"
+            android:id="@+id/AwayTeamFlag"/>
+    </RelativeLayout>
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TETE"
+        android:id="@+id/info"
+        android:layout_centerHorizontal="true"
+       >
+
+
+        <ImageView
+            android:id="@+id/information_icone"
+            android:layout_width="119dp"
+            android:layout_height="95dp"
+            android:src="@android:drawable/ic_menu_info_details" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Information"
+            android:layout_toRightOf="@id/information_icone"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/info">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To Be Continued"
+            android:textSize="30dp"
+            />
+    </RelativeLayout>
+
+
+</RelativeLayout>

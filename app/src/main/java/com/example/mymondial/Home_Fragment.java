@@ -11,6 +11,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -94,6 +96,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+
         // Inflate the layout for this fragment
         return inflate;
     }
@@ -105,7 +108,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
         // REQUEST API FOR MATCH
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         MatchListview = (ListView) getView().findViewById(R.id.match_live);
-        Match_adapter match_adapter = new Match_adapter(getActivity(),HomeTeam, AwayTeam, Score, Time, HomeTeamFlag, AwayTeamFlag );
+        Match_adapter match_adapter = new Match_adapter(getActivity(), HomeTeam, AwayTeam, Score, Time, HomeTeamFlag, AwayTeamFlag );
         //String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=1243";  //LDC
         String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -154,6 +157,21 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
+
+        MatchListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager() ;
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.Layout, new Match_Fragment());
+                fragmentTransaction.commit();
+
+                Bundle match_id = new Bundle();
+                match_id.putString("MID", Long.toString(id));
+                getParentFragmentManager().setFragmentResult("match_id",match_id );
+            }
+        });
     }
 
     public void onNothingSelected(AdapterView<?> adapterView) {
