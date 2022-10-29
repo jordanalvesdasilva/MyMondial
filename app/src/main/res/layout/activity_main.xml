@@ -5,8 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2196F3"
     tools:context="MainActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/Layout"
+    android:layout_above="@id/navbar"
+    android:layout_below="@id/toolbar"/>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/navbar"
+            app:menu="@menu/bottom_nav_menu"/>
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -18,25 +29,5 @@
             app:title="MyMondial"
             app:titleMarginStart="24dp"
             app:titleTextColor="@color/black" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
-            android:layout_marginTop="30dp"
-            android:layout_centerHorizontal="true"
-            android:textSize="30dp"/>
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/spinner"
-            android:layout_marginTop="30dp"
-            android:id="@+id/match_live"
-            android:divider="@color/white"
-            android:listSelector="#6FB6D6"
-            tools:listitem="@layout/activity_match_listview"
-            android:dividerHeight="1px" />
 
 </RelativeLayout>

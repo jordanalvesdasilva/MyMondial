@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:id="@+id/homes"
+        />
+    <item android:title="Groupes"
+        android:icon="@drawable/ic_baseline_view_list_24"
+        android:id="@+id/groupes"
+        />
+    <item android:title="Joueurs"
+        android:icon="@drawable/ic_baseline_query_stats_24"
+        android:id="@+id/joueur"
+        />
+</menu>
