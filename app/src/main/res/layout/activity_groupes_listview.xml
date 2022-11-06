@@ -27,7 +27,7 @@
         android:layout_marginTop="5dp"
         android:textStyle="bold"
         android:textColor="#2196F3"
-        android:id="@+id/lettre_groupe"/>
+        android:id="@+id/Groupe_name"/>
 
     <RelativeLayout
         android:layout_marginTop="33dp"

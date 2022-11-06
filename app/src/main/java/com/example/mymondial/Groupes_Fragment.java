@@ -33,6 +33,8 @@ import java.util.ArrayList;
 public class Groupes_Fragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private ListView GroupesListview;
+
+    private ArrayList<String> Groupe_name = new ArrayList<String>() ;
     // EQUIPE 1
     private ArrayList<Integer> E1_flag = new ArrayList<Integer>();
     private ArrayList<String> E1_name = new ArrayList<String>() ;
@@ -137,7 +139,8 @@ public class Groupes_Fragment extends Fragment implements AdapterView.OnItemSele
         Groupes_adapter groupes_adapter = new Groupes_adapter(getActivity(), E1_flag, E1_name, E1_match_joue, E1_victoire, E1_defaite, E1_nul, E1_point,
                                                                              E2_flag, E2_name, E2_match_joue, E2_victoire, E2_defaite, E2_nul, E2_point,
                                                                              E3_flag, E3_name, E3_match_joue, E3_victoire, E3_defaite, E3_nul, E3_point,
-                                                                             E4_flag, E4_name, E4_match_joue, E4_victoire, E4_defaite, E4_nul, E4_point);
+                                                                             E4_flag, E4_name, E4_match_joue, E4_victoire, E4_defaite, E4_nul, E4_point,
+                                                                             Groupe_name);
         String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

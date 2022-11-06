@@ -14,6 +14,7 @@ public class Groupes_adapter extends BaseAdapter {
 
     Context context;
 
+    ArrayList<String> Groupe_name = new ArrayList<String>();
     // EQUIPE 1
     ArrayList<Integer> E1_flag = new ArrayList<Integer>();
     ArrayList<String> E1_name = new ArrayList<String>();
@@ -52,9 +53,11 @@ public class Groupes_adapter extends BaseAdapter {
     public Groupes_adapter(Context context, ArrayList<Integer> E1_flag, ArrayList<String> E1_name, ArrayList<String> E1_match_joue, ArrayList<String> E1_victoire, ArrayList<String> E1_defaite, ArrayList<String> E1_nul, ArrayList<String> E1_point,
                                             ArrayList<Integer> E2_flag, ArrayList<String> E2_name, ArrayList<String> E2_match_joue, ArrayList<String> E2_victoire, ArrayList<String> E2_defaite, ArrayList<String> E2_nul, ArrayList<String> E2_point,
                                             ArrayList<Integer> E3_flag, ArrayList<String> E3_name, ArrayList<String> E3_match_joue, ArrayList<String> E3_victoire, ArrayList<String> E3_defaite, ArrayList<String> E3_nul, ArrayList<String> E3_point,
-                                            ArrayList<Integer> E4_flag, ArrayList<String> E4_name, ArrayList<String> E4_match_joue, ArrayList<String> E4_victoire, ArrayList<String> E4_defaite, ArrayList<String> E4_nul, ArrayList<String> E4_point){
+                                            ArrayList<Integer> E4_flag, ArrayList<String> E4_name, ArrayList<String> E4_match_joue, ArrayList<String> E4_victoire, ArrayList<String> E4_defaite, ArrayList<String> E4_nul, ArrayList<String> E4_point,
+                                            ArrayList<String> Groupe_name){
         this.context=context;
 
+        this.Groupe_name=Groupe_name;
         // EQUIPE 1
         this.E1_flag=E1_flag;
         this.E1_name=E1_name;
@@ -93,7 +96,7 @@ public class Groupes_adapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return E1_name.size();
+        return Groupe_name.size();
     }
 
     @Override
@@ -112,6 +115,7 @@ public class Groupes_adapter extends BaseAdapter {
 
         // APPLICATION DES VARIABLES
 
+        TextView Groupe_NameView = (TextView) convertView.findViewById(R.id.Groupe_name);
         // DRAPEAUX DES PAYS
         ImageView E1_FlagView = (ImageView) convertView.findViewById(R.id.E1_flag);
         ImageView E2_FlagView = (ImageView) convertView.findViewById(R.id.E2_flag);
@@ -151,6 +155,7 @@ public class Groupes_adapter extends BaseAdapter {
 
         // AFFICHAGES
 
+        Groupe_NameView.setText(Groupe_name.get(position));
         // DRAPEAUX
         E1_FlagView.setImageResource(E1_flag.get(position));
         E2_FlagView.setImageResource(E2_flag.get(position));
