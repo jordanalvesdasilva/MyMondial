@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:text="GROUPE"
         android:textSize="20dp"
-        android:layout_margin="5dp"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:id="@+id/G_layout"/>
@@ -21,8 +20,8 @@
         android:layout_height="wrap_content"
         android:text="X"
         android:textSize="20dp"
-        android:layout_margin="5dp"
         android:layout_toRightOf="@id/G_layout"
+        android:layout_marginLeft="8dp"
         android:textStyle="bold"
         android:textColor="#F44336"
         android:id="@+id/Groupe_name"/>
