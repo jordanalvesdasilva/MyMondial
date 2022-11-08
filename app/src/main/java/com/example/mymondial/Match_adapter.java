@@ -1,8 +1,6 @@
 package com.example.mymondial;
 
-import android.accessibilityservice.AccessibilityService;
 import android.content.Context;
-import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.fragment.app.strictmode.FragmentStrictMode;
-
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 public class Match_adapter extends BaseAdapter {
 
@@ -24,9 +19,10 @@ public class Match_adapter extends BaseAdapter {
     ArrayList<String> Time = new ArrayList<String>();
     ArrayList<Integer> HomeTeamFlag = new ArrayList<Integer>();
     ArrayList<Integer> AwayTeamFlag = new ArrayList<Integer>();
+    ArrayList<String> ID = new ArrayList<String>();
     LayoutInflater inflater ;
 
-    public Match_adapter(Context context, ArrayList<String> HomeTeam, ArrayList<String> AwayTeam, ArrayList<String> Score, ArrayList<String> Time, ArrayList<Integer> HomeTeamFlag, ArrayList<Integer> AwayTeamFlag){
+    public Match_adapter(Context context, ArrayList<String> HomeTeam, ArrayList<String> AwayTeam, ArrayList<String> Score, ArrayList<String> Time, ArrayList<Integer> HomeTeamFlag, ArrayList<Integer> AwayTeamFlag, ArrayList<String> ID){
         this.context=context;
         this.AwayTeam=AwayTeam;
         this.HomeTeam=HomeTeam;
@@ -34,6 +30,7 @@ public class Match_adapter extends BaseAdapter {
         this.Score=Score;
         this.HomeTeamFlag= HomeTeamFlag;
         this.AwayTeamFlag=AwayTeamFlag;
+        this.ID=ID;
         inflater = LayoutInflater.from(context);
 
     }
@@ -48,8 +45,9 @@ public class Match_adapter extends BaseAdapter {
     }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
+    public long getItemId(int position) {
+        Long ID_long =Long.parseLong(ID.get(position));
+        return ID_long;
     }
 
     @Override

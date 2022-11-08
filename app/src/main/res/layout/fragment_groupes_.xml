@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Groupes_Fragment">
+    tools:context=".Groupes_Fragment"
+    >
 
     <ListView
         android:layout_width="match_parent"

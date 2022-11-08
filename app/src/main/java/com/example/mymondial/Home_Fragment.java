@@ -41,7 +41,8 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
     private ArrayList<String> Time = new ArrayList<String>();
     private ArrayList<Integer> HomeTeamFlag = new ArrayList<Integer>();
     private ArrayList<Integer> AwayTeamFlag = new ArrayList<Integer>();
-    private int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa };
+    private ArrayList<String> ID = new ArrayList<String>();
+    public int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa };
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -108,7 +109,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
         // REQUEST API FOR MATCH
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         MatchListview = (ListView) getView().findViewById(R.id.match_live);
-        Match_adapter match_adapter = new Match_adapter(getActivity(), HomeTeam, AwayTeam, Score, Time, HomeTeamFlag, AwayTeamFlag );
+        Match_adapter match_adapter = new Match_adapter(getActivity(), HomeTeam, AwayTeam, Score, Time, HomeTeamFlag, AwayTeamFlag, ID);
         //String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=1243";  //LDC
         String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -118,7 +119,6 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
                         try {
                             JSONObject jObject = new JSONObject(response);
                             JSONArray data = jObject.getJSONArray("data");
-                            System.out.println("Response is: " + response.substring(0, 500));
                             switch (current_day) {
                                 case "Journée 1":
                                     Parse(0,16,data);
@@ -162,11 +162,13 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager() ;
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.Layout, new Match_Fragment());
                 fragmentTransaction.commit();
 
+                System.out.println(id);
                 Bundle match_id = new Bundle();
                 match_id.putString("MID", Long.toString(id));
                 getParentFragmentManager().setFragmentResult("match_id",match_id );
@@ -187,7 +189,9 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
             Time.clear();
             HomeTeamFlag.clear();
             AwayTeamFlag.clear();
+            ID.clear();
             for (int i = min; i <max; i++) {
+                ID.add(data.getJSONObject(i).getString("match_id"));
                 if (data.getJSONObject(i).getJSONObject("home_team").has("name")) {
                     HomeTeam.add(data.getJSONObject(i).getJSONObject("home_team").getString("name"));
                     AwayTeam.add(data.getJSONObject(i).getJSONObject("away_team").getString("name"));
@@ -217,7 +221,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
 
     }
 
-    private int ChooseFlag(String name_team){
+    public int ChooseFlag(String name_team){
         switch (name_team){
             case "Senegal":
                 return Flag[26];
@@ -283,7 +287,8 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
                 return Flag[6];
             case "Serbia":
                 return Flag[27];
+            default:
+                return R.drawable.ic_baseline_flag_24;
         }
-        return 0;
     }
 }

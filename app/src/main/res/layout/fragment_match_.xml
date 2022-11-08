@@ -10,7 +10,7 @@
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#C0C6BC"
+    android:background="#FFE082"
     android:id="@+id/TETE">
     <TextView
         android:layout_width="wrap_content"
@@ -20,35 +20,39 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
-        android:id="@+id/Time"/>
+        android:id="@+id/TimeMatch"/>
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp">
+    android:layout_alignParentLeft="true"
+    android:layout_marginLeft="5dp"
+    android:layout_toLeftOf="@id/TimeMatch"
+    android:layout_marginRight="20dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/HomeTeamFlag"
+        android:layout_below="@id/HomeTeamFlagMatch"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:textStyle="bold"
         android:text="Germany"
         android:textSize="20dp"
-        android:id="@+id/HomeTeam"/>
+        android:id="@+id/HomeTeamMatch"/>
     <ImageView
         android:layout_width="100dp"
         android:layout_height="70dp"
         app:srcCompat="@drawable/allemagne"
-        android:id="@+id/HomeTeamFlag"/>
+        android:id="@+id/HomeTeamFlagMatch"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
 
     <TextView
-        android:id="@+id/Result"
+        android:id="@+id/ResultMatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="3 - 5"
-        android:layout_below="@id/Time"
+        android:layout_below="@id/TimeMatch"
         android:textStyle="bold"
         android:textSize="30dp"/>
 
@@ -56,22 +60,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@id/TimeMatch"
+        android:layout_marginLeft="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/AwayTeamFlag"
+            android:layout_below="@id/AwayTeamFlagMatch"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:textStyle="bold"
             android:text="Germany"
             android:textSize="20dp"
-            android:id="@+id/AwayTeam"/>
+            android:textAlignment="center"
+            android:id="@+id/AwayTeamMatch"/>
         <ImageView
             android:layout_width="100dp"
             android:layout_height="70dp"
             app:srcCompat="@drawable/allemagne"
-            android:id="@+id/AwayTeamFlag"/>
+            android:id="@+id/AwayTeamFlagMatch"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 </RelativeLayout>
     <RelativeLayout
@@ -81,8 +89,6 @@
         android:id="@+id/info"
         android:layout_centerHorizontal="true"
        >
-
-
         <ImageView
             android:id="@+id/information_icone"
             android:layout_width="119dp"
@@ -102,12 +108,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/info">
-        <TextView
+        android:layout_below="@id/info"
+        >
+        <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="To Be Continued"
-            android:textSize="30dp"
+            android:scrollbarSize="0dp"
+            android:id="@+id/info_listview"
+            tools:listitem="@layout/info_listview"
             />
     </RelativeLayout>
 
