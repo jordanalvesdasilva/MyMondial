@@ -201,17 +201,19 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
                     HomeTeam.add("not found");
                     AwayTeam.add("not found");
                 }
-                if (data.getJSONObject(i).getJSONObject("stats").getString("ft_score") == "null") {
-                    Score.add("  -  ");
-                } else {
-                    Score.add(data.getJSONObject(i).getJSONObject("stats").getString("ft_score"));
-                }
                 if ((data.getJSONObject(i).getString("status").equals("notstarted"))) {
                     Time.add(data.getJSONObject(i).getString("match_start"));
+                    Score.add("  -  ");
                 } else if (data.getJSONObject(i).getString("status").equals("finished")) {
                     Time.add("TER");
+                    String ScoreHome = data.getJSONObject(i).getJSONObject("stats").getString("home_score");
+                    String ScoreAway = data.getJSONObject(i).getJSONObject("stats").getString("away_score");
+                    Score.add(ScoreHome + "-" +ScoreAway);
                 } else {
                     Time.add(data.getJSONObject(i).getString("minute"));
+                    String ScoreHome = data.getJSONObject(i).getJSONObject("stats").getString("home_score");
+                    String ScoreAway = data.getJSONObject(i).getJSONObject("stats").getString("away_score");
+                    Score.add(ScoreHome + "-" +ScoreAway);
                 }
             }
         }

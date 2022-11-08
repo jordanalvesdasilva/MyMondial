@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="285dp"
-    android:minHeight="80dp"
-    tools:context=".Match_Listview">
+    android:minHeight="80dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,6 +12,7 @@
         android:text="GROUPE"
         android:textSize="20dp"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:id="@+id/G_layout"/>
     <TextView
@@ -23,88 +23,79 @@
         android:layout_toRightOf="@id/G_layout"
         android:layout_marginLeft="8dp"
         android:textStyle="bold"
-        android:textColor="#F44336"
+        android:textColor="#4560F6"
         android:id="@+id/Groupe_name"/>
 
     <RelativeLayout
         android:layout_marginTop="33dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFE082">
+        android:background="#00FFE082">
 
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/Colonne1"
-    android:layout_marginLeft="10dp">
+    android:layout_marginLeft="20dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Equipes"
         android:textSize="16dp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true" />
+        android:textStyle="bold" />
     <ImageView
         android:id="@+id/E1_flag"
         android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/portugal"
-        android:layout_centerHorizontal="true" />
+        app:srcCompat="@drawable/portugal" />
     <TextView
         android:id="@+id/E1_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="62dp"
         android:text="Republic of Korea"
-        android:textSize="15dp"
-        android:layout_centerHorizontal="true" />
+        android:textSize="15dp" />
     <ImageView
         android:id="@+id/E2_flag"
         android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginTop="85dp"
-        app:srcCompat="@drawable/ghana"
-        android:layout_centerHorizontal="true" />
+        app:srcCompat="@drawable/ghana" />
     <TextView
         android:id="@+id/E2_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="117dp"
         android:text="E2"
-        android:textSize="15dp"
-        android:layout_centerHorizontal="true" />
+        android:textSize="15dp" />
     <ImageView
         android:id="@+id/E3_flag"
         android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginTop="140dp"
-        app:srcCompat="@drawable/uruguay"
-        android:layout_centerHorizontal="true" />
+        app:srcCompat="@drawable/uruguay" />
     <TextView
         android:id="@+id/E3_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="172dp"
         android:text="E3"
-        android:textSize="15dp"
-        android:layout_centerHorizontal="true" />
+        android:textSize="15dp" />
     <ImageView
         android:id="@+id/E4_flag"
         android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginTop="195dp"
-        app:srcCompat="@drawable/republique_de_coree"
-        android:layout_centerHorizontal="true" />
+        app:srcCompat="@drawable/republique_de_coree" />
     <TextView
         android:id="@+id/E4_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="227dp"
         android:text="E4"
-        android:textSize="15dp"
-        android:layout_centerHorizontal="true" />
+        android:textSize="15dp" />
 
 </RelativeLayout>
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="MainActivity"
-    android:background="#2196F3">
+    android:background="@color/white">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,7 +28,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="#97E5F8"
             app:logo="@drawable/_7584041_ic_ne_de_ballon_de_football_conception_de_cadre_bleu_illustration_vectorielle"
             app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
             app:title="MyMondial"

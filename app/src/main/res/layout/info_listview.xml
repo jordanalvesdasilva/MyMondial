@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:minHeight="80dp"
+    >
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toLeftOf="@+id/center"
+    android:layout_marginRight="30dp"
+    android:layout_marginTop="5dp">
+    <TextView
+        android:id="@+id/time_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="15dp"
+        android:layout_alignParentRight="true"
+       />
+
+    <TextView
+        android:id="@+id/who_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_left"
+        android:text="TextView"
+        android:textSize="20dp"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
+        android:id="@+id/who_help_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/who_left"
+        android:text="TextView"
+        android:textSize="15dp"
+        android:layout_alignParentRight="true"
+        />
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:id="@+id/center">
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/score"
+            app:srcCompat="@drawable/ic_baseline_sports_soccer_24" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/time_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:id="@+id/who_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/time_right"
+            android:text="TextView"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/who_help_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/who_right"
+            android:text="TextView"
+            android:textSize="15dp"/>
+    </RelativeLayout>
+</RelativeLayout>
+
