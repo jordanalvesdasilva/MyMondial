@@ -4,13 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,7 +15,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,14 +25,14 @@ import java.util.ArrayList;
  * Use the {@link Groupes_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Groupes_Fragment extends Fragment implements AdapterView.OnItemSelectedListener{
+public class Groupes_Fragment extends Fragment {
 
     private ListView GroupesListview;
 
-    private ArrayList<String> Groupe_name = new ArrayList<String>() ;
+    private ArrayList<String> Groupe_name = new ArrayList<String>();
     // EQUIPE 1
     private ArrayList<Integer> E1_flag = new ArrayList<Integer>();
-    private ArrayList<String> E1_name = new ArrayList<String>() ;
+    private ArrayList<String> E1_name = new ArrayList<String>();
     private ArrayList<String> E1_match_joue = new ArrayList<String>();
     private ArrayList<String> E1_victoire = new ArrayList<String>();
     private ArrayList<String> E1_defaite = new ArrayList<String>();
@@ -45,7 +40,7 @@ public class Groupes_Fragment extends Fragment implements AdapterView.OnItemSele
     private ArrayList<String> E1_point = new ArrayList<String>();
     // EQUIPE 2
     private ArrayList<Integer> E2_flag = new ArrayList<Integer>();
-    private ArrayList<String> E2_name = new ArrayList<String>() ;
+    private ArrayList<String> E2_name = new ArrayList<String>();
     private ArrayList<String> E2_match_joue = new ArrayList<String>();
     private ArrayList<String> E2_victoire = new ArrayList<String>();
     private ArrayList<String> E2_defaite = new ArrayList<String>();
@@ -53,7 +48,7 @@ public class Groupes_Fragment extends Fragment implements AdapterView.OnItemSele
     private ArrayList<String> E2_point = new ArrayList<String>();
     // EQUIPE 3
     private ArrayList<Integer> E3_flag = new ArrayList<Integer>();
-    private ArrayList<String> E3_name = new ArrayList<String>() ;
+    private ArrayList<String> E3_name = new ArrayList<String>();
     private ArrayList<String> E3_match_joue = new ArrayList<String>();
     private ArrayList<String> E3_victoire = new ArrayList<String>();
     private ArrayList<String> E3_defaite = new ArrayList<String>();
@@ -61,7 +56,7 @@ public class Groupes_Fragment extends Fragment implements AdapterView.OnItemSele
     private ArrayList<String> E3_point = new ArrayList<String>();
     // EQUIPE 4
     private ArrayList<Integer> E4_flag = new ArrayList<Integer>();
-    private ArrayList<String> E4_name = new ArrayList<String>() ;
+    private ArrayList<String> E4_name = new ArrayList<String>();
     private ArrayList<String> E4_match_joue = new ArrayList<String>();
     private ArrayList<String> E4_victoire = new ArrayList<String>();
     private ArrayList<String> E4_defaite = new ArrayList<String>();
@@ -69,8 +64,7 @@ public class Groupes_Fragment extends Fragment implements AdapterView.OnItemSele
     private ArrayList<String> E4_point = new ArrayList<String>();
 
     // DRAPEAUX PAYS
-    private int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa };
-
+    private int Flag[] = {R.drawable.allemagne, R.drawable.angleterre, R.drawable.arabie_saoudite, R.drawable.argentine, R.drawable.australie, R.drawable.belgique, R.drawable.bresil, R.drawable.cameroun, R.drawable.canada, R.drawable.croatie, R.drawable.costa_rica, R.drawable.danemark, R.drawable.equateur, R.drawable.espagne, R.drawable.france, R.drawable.ghana, R.drawable.iran, R.drawable.japon, R.drawable.maroc, R.drawable.mexique, R.drawable.pays_bas, R.drawable.pays_de_galles, R.drawable.pologne, R.drawable.portugal, R.drawable.quatar, R.drawable.republique_de_coree, R.drawable.senegal, R.drawable.serbie, R.drawable.suisse, R.drawable.tunisie, R.drawable.uruguay, R.drawable.usa};
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -119,64 +113,96 @@ public class Groupes_Fragment extends Fragment implements AdapterView.OnItemSele
                              Bundle savedInstanceState) {
 
         View inflate = (ViewGroup) inflater.inflate(R.layout.fragment_groupes_, null);
-        //Spinner spinner = inflate.findViewById(R.id.spinner);
-        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.journée, android.R.layout.simple_spinner_dropdown_item);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //spinner.setAdapter(adapter);
-        //spinner.setOnItemSelectedListener(this);
 
-        // Inflate the layout for this fragment
-        return inflate;
-    }
-
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-        String current_day = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), current_day, Toast.LENGTH_SHORT).show();
 
         // REQUEST API FOR MATCH
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        GroupesListview = (ListView) getView().findViewById(R.id.match_live);
+        GroupesListview = (ListView) inflate.findViewById(R.id.groupes_live);
         Groupes_adapter groupes_adapter = new Groupes_adapter(getActivity(), E1_flag, E1_name, E1_match_joue, E1_victoire, E1_defaite, E1_nul, E1_point,
-                                                                             E2_flag, E2_name, E2_match_joue, E2_victoire, E2_defaite, E2_nul, E2_point,
-                                                                             E3_flag, E3_name, E3_match_joue, E3_victoire, E3_defaite, E3_nul, E3_point,
-                                                                             E4_flag, E4_name, E4_match_joue, E4_victoire, E4_defaite, E4_nul, E4_point,
-                                                                             Groupe_name);
-        String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM
+                E2_flag, E2_name, E2_match_joue, E2_victoire, E2_defaite, E2_nul, E2_point,
+                E3_flag, E3_name, E3_match_joue, E3_victoire, E3_defaite, E3_nul, E3_point,
+                E4_flag, E4_name, E4_match_joue, E4_victoire, E4_defaite, E4_nul, E4_point,
+                Groupe_name);
+        String url = "https://app.sportdataapi.com/api/v1/soccer/standings?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=3072";   //CDM
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jObject = new JSONObject(response);
-                            JSONArray data = jObject.getJSONArray("data");
-                            System.out.println("Response is: " + response.substring(0, 500));
-                            /*switch (current_day) {
-                                case "Journée 1":
-                                    Parse(0,16,data);
-                                    break;
-                                case "Journée 2":
-                                    Parse(16,32,data);
-                                    break;
-                                case "Journée 3":
-                                    Parse(32,48,data);
-                                    break;
-                                case "Huitièmes de finale":
-                                    Parse(48,57,data);
-                                    break;
-                                case "Quarts de finale":
-                                    Parse(57,61,data);
-                                    break;
-                                case "Demi-finales":
-                                    Parse(61,63,data);
-                                    break;
-                                case "Finale":
-                                    Parse(63,64,data);
-                                    break;
-                            }*/
+                            JSONObject data = jObject.getJSONObject("data");
+                            JSONObject Groupes = data.getJSONObject("standings");
+
+                            // PROTOTYPE RECHERCHE API
+                            ResetVariables();
+
+                            for (int i = 0; i < Groupes.length(); i++) {
+                                // AJOUTER RECHERCHE NOM DU GROUPE
+                                String numero_groupe = Integer.toString(i);
+                                // RECUPERATION NOM GROUPE
+                                Groupe_name.add(IdGroupe(numero_groupe));
+                                /*--------------------------------------- EQUIPE 1 ------------------------------------------*/
+                                // NOM EQUIPE 1 + DRAPEAU
+                                E1_name.add(IdPays(Groupes.getJSONArray(numero_groupe).getJSONObject(0).getString("team_id")));
+                                E1_flag.add(ChooseFlag(E1_name.get(i)));
+                                // NOMBRE DE MATCHS JOUES
+                                E1_match_joue.add(Groupes.getJSONArray(numero_groupe).getJSONObject(0).getJSONObject("overall").getString("games_played"));
+                                // NOMBRE DE VICTOIRES
+                                E1_victoire.add(Groupes.getJSONArray(numero_groupe).getJSONObject(0).getJSONObject("overall").getString("won"));
+                                // NOMBRE DE DEFAITES
+                                E1_defaite.add(Groupes.getJSONArray(numero_groupe).getJSONObject(0).getJSONObject("overall").getString("lost"));
+                                // NOMBRE DE MATCHS NULS
+                                E1_nul.add(Groupes.getJSONArray(numero_groupe).getJSONObject(0).getJSONObject("overall").getString("draw"));
+                                // NOMBRE DE POINTS
+                                E1_point.add(Groupes.getJSONArray(numero_groupe).getJSONObject(0).getString("points"));
+                                /*--------------------------------------- EQUIPE 2 ------------------------------------------*/
+                                // NOM EQUIPE 1 + DRAPEAU
+                                E2_name.add(IdPays(Groupes.getJSONArray(numero_groupe).getJSONObject(1).getString("team_id")));
+                                E2_flag.add(ChooseFlag(E2_name.get(i)));
+                                // NOMBRE DE MATCHS JOUES
+                                E2_match_joue.add(Groupes.getJSONArray(numero_groupe).getJSONObject(1).getJSONObject("overall").getString("games_played"));
+                                // NOMBRE DE VICTOIRES
+                                E2_victoire.add(Groupes.getJSONArray(numero_groupe).getJSONObject(1).getJSONObject("overall").getString("won"));
+                                // NOMBRE DE DEFAITES
+                                E2_defaite.add(Groupes.getJSONArray(numero_groupe).getJSONObject(1).getJSONObject("overall").getString("lost"));
+                                // NOMBRE DE MATCHS NULS
+                                E2_nul.add(Groupes.getJSONArray(numero_groupe).getJSONObject(1).getJSONObject("overall").getString("draw"));
+                                // NOMBRE DE POINTS
+                                E2_point.add(Groupes.getJSONArray(numero_groupe).getJSONObject(1).getString("points"));
+                                /*--------------------------------------- EQUIPE 3 ------------------------------------------*/
+                                // NOM EQUIPE 1 + DRAPEAU
+                                E3_name.add(IdPays(Groupes.getJSONArray(numero_groupe).getJSONObject(2).getString("team_id")));
+                                E3_flag.add(ChooseFlag(E3_name.get(i)));
+                                // NOMBRE DE MATCHS JOUES
+                                E3_match_joue.add(Groupes.getJSONArray(numero_groupe).getJSONObject(2).getJSONObject("overall").getString("games_played"));
+                                // NOMBRE DE VICTOIRES
+                                E3_victoire.add(Groupes.getJSONArray(numero_groupe).getJSONObject(2).getJSONObject("overall").getString("won"));
+                                // NOMBRE DE DEFAITES
+                                E3_defaite.add(Groupes.getJSONArray(numero_groupe).getJSONObject(2).getJSONObject("overall").getString("lost"));
+                                // NOMBRE DE MATCHS NULS
+                                E3_nul.add(Groupes.getJSONArray(numero_groupe).getJSONObject(2).getJSONObject("overall").getString("draw"));
+                                // NOMBRE DE POINTS
+                                E3_point.add(Groupes.getJSONArray(numero_groupe).getJSONObject(2).getString("points"));
+                                /*--------------------------------------- EQUIPE 4 ------------------------------------------*/
+                                // NOM EQUIPE 1 + DRAPEAU
+                                E4_name.add(IdPays(Groupes.getJSONArray(numero_groupe).getJSONObject(3).getString("team_id")));
+                                E4_flag.add(ChooseFlag(E4_name.get(i)));
+                                // NOMBRE DE MATCHS JOUES
+                                E4_match_joue.add(Groupes.getJSONArray(numero_groupe).getJSONObject(3).getJSONObject("overall").getString("games_played"));
+                                // NOMBRE DE VICTOIRES
+                                E4_victoire.add(Groupes.getJSONArray(numero_groupe).getJSONObject(3).getJSONObject("overall").getString("won"));
+                                // NOMBRE DE DEFAITES
+                                E4_defaite.add(Groupes.getJSONArray(numero_groupe).getJSONObject(3).getJSONObject("overall").getString("lost"));
+                                // NOMBRE DE MATCHS NULS
+                                E4_nul.add(Groupes.getJSONArray(numero_groupe).getJSONObject(3).getJSONObject("overall").getString("draw"));
+                                // NOMBRE DE POINTS
+                                E4_point.add(Groupes.getJSONArray(numero_groupe).getJSONObject(3).getString("points"));
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        System.out.println(E4_point);
                         GroupesListview.setAdapter(groupes_adapter);
                     }
                 }, new Response.ErrorListener() {
@@ -189,64 +215,47 @@ public class Groupes_Fragment extends Fragment implements AdapterView.OnItemSele
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
-        GroupesListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        return inflate;
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager() ;
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.Layout, new Groupes_Fragment());
-                fragmentTransaction.commit();
-
-                Bundle match_id = new Bundle();
-                match_id.putString("MID", Long.toString(id));
-                getParentFragmentManager().setFragmentResult("match_id",match_id );
-            }
-        });
-    }
-
-    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
-    /*
-    private void Parse(int min, int max, JSONArray data){
 
-        try {
-            HomeTeam.clear();
-            AwayTeam.clear();
-            Score.clear();
-            Time.clear();
-            HomeTeamFlag.clear();
-            AwayTeamFlag.clear();
-            for (int i = min; i <max; i++) {
-                if (data.getJSONObject(i).getJSONObject("home_team").has("name")) {
-                    HomeTeam.add(data.getJSONObject(i).getJSONObject("home_team").getString("name"));
-                    AwayTeam.add(data.getJSONObject(i).getJSONObject("away_team").getString("name"));
-                    HomeTeamFlag.add(ChooseFlag(data.getJSONObject(i).getJSONObject("home_team").getString("name")));
-                    AwayTeamFlag.add(ChooseFlag(data.getJSONObject(i).getJSONObject("away_team").getString("name")));
-                } else {
-                    HomeTeam.add("not found");
-                    AwayTeam.add("not found");
-                }
-                if (data.getJSONObject(i).getJSONObject("stats").getString("ft_score") == "null") {
-                    Score.add("  -  ");
-                } else {
-                    Score.add(data.getJSONObject(i).getJSONObject("stats").getString("ft_score"));
-                }
-                if ((data.getJSONObject(i).getString("status").equals("notstarted"))) {
-                    Time.add(data.getJSONObject(i).getString("match_start"));
-                } else if (data.getJSONObject(i).getString("status").equals("finished")) {
-                    Time.add("TER");
-                } else {
-                    Time.add(data.getJSONObject(i).getString("minute"));
-                }
-            }
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
+    private void ResetVariables(){
+        Groupe_name.clear();
+        // EQUIPE 1 DU GROUPE
+        E1_flag.clear();
+        E1_name.clear();
+        E1_match_joue.clear();
+        E1_victoire.clear();
+        E1_defaite.clear();
+        E1_nul.clear();
+        E1_point.clear();
+        // EQUIPE 2 DU GROUPE
+        E2_flag.clear();
+        E2_name.clear();
+        E2_match_joue.clear();
+        E2_victoire.clear();
+        E2_defaite.clear();
+        E2_nul.clear();
+        E2_point.clear();
+        // EQUIPE 3 DU GROUPE
+        E3_flag.clear();
+        E3_name.clear();
+        E3_match_joue.clear();
+        E3_victoire.clear();
+        E3_defaite.clear();
+        E3_nul.clear();
+        E3_point.clear();
+        // EQUIPE 4 DU GROUPE
+        E4_flag.clear();
+        E4_name.clear();
+        E4_match_joue.clear();
+        E4_victoire.clear();
+        E4_defaite.clear();
+        E4_nul.clear();
+        E4_point.clear();
+    }
 
-    }*/
 
     private int ChooseFlag(String name_team){
         switch (name_team){
@@ -316,6 +325,98 @@ public class Groupes_Fragment extends Fragment implements AdapterView.OnItemSele
                 return Flag[27];
         }
         return 0;
+    }
+    private String IdPays (String Team_id){
+        switch (Team_id){
+            case "14220" :
+                return "Costa Rica";
+            case "3017":
+                return "Germany";
+            case "12397":
+                return "Japan";
+            case "3024":
+                return "Spain";
+            case "12550":
+                return "Ecuador";
+            case "3080":
+                return "Netherlands";
+            case "12279":
+                return "Qatar";
+            case "56":
+                return "Senegal";
+            case "12302":
+                return "England";
+            case "12396":
+                return "Iran";
+            case "7850":
+                return "USA";
+            case "14218":
+                return "Wales";
+            case "12502":
+                return "Argentina";
+            case "12473":
+                return "Mexico";
+            case "3011":
+                return "Poland";
+            case "767":
+                return "Saudi Arabia";
+            case "3008":
+                return "Denmark";
+            case "12300":
+                return "France";
+            case "73":
+                return "Tunisia";
+            case "14219":
+                return "Australia";
+            case "3054":
+                return "Belgium";
+            case "7835":
+                return "Canada";
+            case "3026":
+                return "Croatia";
+            case "52":
+                return "Morocco";
+            case "12504":
+                return "Brazil";
+            case "85":
+                return "Cameroon";
+            case "3036":
+                return "Serbia";
+            case "3064":
+                return "Switzerland";
+            case "95":
+                return "Ghana";
+            case "755":
+                return "Republic of Korea";
+            case "12299":
+                return "Portugal";
+            case "12501":
+                return "Uruguay";
+        }
+        return null;
+    }
+
+    private String IdGroupe(String numero){
+        switch (numero){
+            case "0":
+                return "A";
+            case "1":
+                return "B";
+            case "2":
+                return "C";
+            case "3":
+                return "D";
+            case "4":
+                return "E";
+            case "5":
+                return "F";
+            case "6":
+                return "G";
+            case "7":
+                return "H";
+            default:
+                return "Z";
+        }
     }
 
 }
