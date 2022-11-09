@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="11/11 12:00"
+        android:text="..."
         android:textSize="15dp"
         android:layout_margin="5dp"
         android:layout_centerHorizontal="true"
@@ -26,7 +26,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="5dp"
         android:textAlignment="textEnd"
-        android:text="Brazil"
+        android:text="..."
         android:textSize="15dp"
         android:id="@+id/HomeTeam"/>
     <ImageView
@@ -34,7 +34,7 @@
         android:layout_height="35dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
-        app:srcCompat="@drawable/allemagne"
+        app:srcCompat="@drawable/ic_baseline_flag_24"
         android:id="@+id/HomeTeamFlag"/>
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="3 - 5"
+        android:text="  -  "
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_centerVertical="true"/>
@@ -55,7 +55,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="5dp"
         android:layout_centerVertical="true"
-        android:text="Portugal"
+        android:text="..."
         android:textSize="15dp"
         android:id="@+id/AwayTeam"/>
 
@@ -66,7 +66,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
-        app:srcCompat="@drawable/argentine" />
+        app:srcCompat="@drawable/ic_baseline_flag_24"/>
 
 
 </RelativeLayout>
