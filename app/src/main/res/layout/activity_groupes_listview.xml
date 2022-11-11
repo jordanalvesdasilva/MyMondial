@@ -50,20 +50,20 @@
         android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/portugal" />
+        app:srcCompat="@drawable/ic_baseline_flag_24" />
     <TextView
         android:id="@+id/E1_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="62dp"
-        android:text="Republic of Korea"
+        android:text="E1"
         android:textSize="15dp" />
     <ImageView
         android:id="@+id/E2_flag"
         android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginTop="85dp"
-        app:srcCompat="@drawable/ghana" />
+        app:srcCompat="@drawable/ic_baseline_flag_24" />
     <TextView
         android:id="@+id/E2_name"
         android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
         android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginTop="140dp"
-        app:srcCompat="@drawable/uruguay" />
+        app:srcCompat="@drawable/ic_baseline_flag_24" />
     <TextView
         android:id="@+id/E3_name"
         android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
         android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginTop="195dp"
-        app:srcCompat="@drawable/republique_de_coree" />
+        app:srcCompat="@drawable/ic_baseline_flag_24" />
     <TextView
         android:id="@+id/E4_name"
         android:layout_width="wrap_content"

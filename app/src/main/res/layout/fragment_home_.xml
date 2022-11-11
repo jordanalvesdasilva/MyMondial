@@ -13,18 +13,22 @@
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:textSize="30dp"/>
-
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/spinner"
+    android:layout_marginTop="30dp"
+    android:id="@+id/RefreshHome">
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/spinner"
-        android:layout_marginTop="30dp"
         android:id="@+id/match_live"
         android:divider="@color/white"
         android:listSelector="#6FB6D6"
         tools:listitem="@layout/activity_match_listview"
-        android:dividerHeight="1px" >
+        android:dividerHeight="1px" />
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </ListView>
+
 
 </RelativeLayout>

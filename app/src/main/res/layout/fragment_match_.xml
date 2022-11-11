@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
    android:layout_height="match_parent"
-    tools:context=".Match_Listview"
     android:background="@drawable/gradient"
-    >
+    tools:context=".Match_Fragment">
+
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="2020-11-20 12:00:10"
+        android:text="..."
         android:textSize="20dp"
         android:textStyle="bold"
         android:textAlignment="center"
@@ -36,13 +36,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:textStyle="bold"
-        android:text="Germany"
+        android:text="..."
         android:textSize="20dp"
         android:id="@+id/HomeTeamMatch"/>
     <ImageView
         android:layout_width="100dp"
         android:layout_height="70dp"
-        app:srcCompat="@drawable/allemagne"
+        app:srcCompat="@drawable/ic_baseline_flag_24"
         android:id="@+id/HomeTeamFlagMatch"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="3 - 5"
+        android:text="  -  "
         android:layout_below="@id/TimeMatch"
         android:textStyle="bold"
         android:textSize="30dp"/>
@@ -71,14 +71,14 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:textStyle="bold"
-            android:text="Germany"
+            android:text="..."
             android:textSize="20dp"
             android:textAlignment="center"
             android:id="@+id/AwayTeamMatch"/>
         <ImageView
             android:layout_width="100dp"
             android:layout_height="70dp"
-            app:srcCompat="@drawable/allemagne"
+            app:srcCompat="@drawable/ic_baseline_flag_24"
             android:id="@+id/AwayTeamFlagMatch"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
@@ -113,13 +113,18 @@
         android:layout_height="match_parent"
         android:layout_below="@id/info"
         >
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RefreshMatch">
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scrollbarSize="0dp"
             android:id="@+id/info_listview"
-            tools:listitem="@layout/info_listview"
-            />
+            tools:listitem="@layout/info_listview" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </RelativeLayout>
 
 
