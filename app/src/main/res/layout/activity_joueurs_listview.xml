@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:minHeight="80dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:text="10"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:id="@+id/Player_Rang"/>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/Player_Rang"
+        android:layout_marginLeft="15dp"
+        app:srcCompat="@drawable/pologne"
+        android:id="@+id/Player_Flag"/>
+
+    <TextView
+        android:id="@+id/Player_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/Player_Flag"
+        android:layout_toLeftOf="@+id/Player_Stats"
+        android:text="R.Lewandowski"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/Player_Stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/Player_Min"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:text="20"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Player_Min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="500"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>
