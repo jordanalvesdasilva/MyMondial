@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 public class Match_Fragment extends Fragment {
 
     private ListView InfoListview;
+    SwipeRefreshLayout swipeRefreshLayout;
     private ArrayList<String> Home_Time = new ArrayList<String>();
     private ArrayList<String> Home_Who = new ArrayList<String>();
     private ArrayList<String> Home_Who_Help = new ArrayList<String>();
@@ -94,95 +96,107 @@ public class Match_Fragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 String match_id = result.getString("MID");
-                System.out.println(match_id);
-                RequestQueue queue = Volley.newRequestQueue(getActivity());
-                InfoListview = (ListView) getView().findViewById(R.id.info_listview);
-                Information_adapter information_adapter = new Information_adapter(getActivity(), Home_Time, Home_Who, Home_Who_Help, Score, Logo, Away_Time, Away_Who, Away_Who_Help );
-                String url = "https://app.sportdataapi.com/api/v1/soccer/matches/"+match_id+"?apikey=193beda0-5093-11ed-aa03-b339e6eb1617";   //CDM
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                try {
-                                    Home_Time.clear();
-                                    Home_Who.clear();
-                                    Home_Who_Help.clear();
-                                    Score.clear();
-                                    Logo.clear();
-                                    Away_Time.clear();
-                                    Away_Who.clear();
-                                    Away_Who_Help.clear();
-                                    TextView HomeTeam = (TextView) getView().findViewById(R.id.HomeTeamMatch);
-                                    ImageView HomeTeamFlag = (ImageView) getView().findViewById(R.id.HomeTeamFlagMatch);
-                                    TextView AwayTeam = (TextView) getView().findViewById(R.id.AwayTeamMatch);
-                                    ImageView AwayTeamFlag = (ImageView) getView().findViewById(R.id.AwayTeamFlagMatch);
-                                    TextView Time = (TextView) getView().findViewById(R.id.TimeMatch);
-                                    TextView Result = (TextView) getView().findViewById(R.id.ResultMatch);
-                                    JSONObject jObject = new JSONObject(response);
-                                    JSONObject data = jObject.getJSONObject("data");
-                                    String HometeamID = data.getJSONObject("home_team").getString("team_id");
-                                    String AwayteamID = data.getJSONObject("away_team").getString("team_id");
-                                    int i=0;
-                                    if (data.has("match_events") && !data.isNull("match_events")){
-                                    JSONArray match_events = data.getJSONArray("match_events");
-                                        for (i = 0; i < match_events.length(); i++){
-                                                if (match_events.getJSONObject(i).getString("type").equals("goal")) {
-                                                    if (match_events.getJSONObject(i).getString("team_id").equals(HometeamID)) {
-                                                        Home_Time.add(match_events.getJSONObject(i).getString("minute"));
-                                                        Home_Who.add(match_events.getJSONObject(i).getString("player_name"));
-                                                        Home_Who_Help.add(match_events.getJSONObject(i).getString("related_player_name"));
-                                                        Score.add(match_events.getJSONObject(i).getString("result"));
-                                                        Logo.add(R.drawable.ic_baseline_sports_soccer_24);
-                                                        Away_Time.add(" ");
-                                                        Away_Who.add(" ");
-                                                        Away_Who_Help.add(" ");
-                                                    } else {
-                                                        Away_Time.add(match_events.getJSONObject(i).getString("minute"));
-                                                        Away_Who.add(match_events.getJSONObject(i).getString("player_name"));
-                                                        Away_Who_Help.add(match_events.getJSONObject(i).getString("related_player_name"));
-                                                        Score.add(match_events.getJSONObject(i).getString("result"));
-                                                        Logo.add(R.drawable.ic_baseline_sports_soccer_24);
-                                                        Home_Time.add(" ");
-                                                        Home_Who.add(" ");
-                                                        Home_Who_Help.add(" ");
-                                                    }
-                                                }
-                                        }
-                                    }
-                                    HomeTeam.setText(data.getJSONObject("home_team").getString("name"));
-                                    AwayTeam.setText(data.getJSONObject("away_team").getString("name"));
-                                    HomeTeamFlag.setImageResource(ChooseFlag(data.getJSONObject("home_team").getString("name")));
-                                    AwayTeamFlag.setImageResource(ChooseFlag(data.getJSONObject("away_team").getString("name")));
-                                    if ((data.getString("status").equals("notstarted"))) {
-                                        Time.setText(data.getString("match_start"));
-                                        Result.setText(" - ");
-                                    } else if (data.getString("status").equals("finished")) {
-                                        Time.setText("TER");
-                                        Result.setText(data.getJSONObject("stats").getString("ft_score"));
-                                    } else {
-                                        Time.setText(data.getString("minute"));
-                                        Result.setText(Score.get(i));
-                                    }
+                RequetAPI(match_id);
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                InfoListview.setAdapter(information_adapter);
-                            }
-                        }, new Response.ErrorListener() {
+                swipeRefreshLayout = getView().findViewById(R.id.RefreshMatch);
+                swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println("That didn't work!");
+                    public void onRefresh() {
+                        swipeRefreshLayout.setRefreshing(false);
+                        RequetAPI(match_id);
                     }
                 });
-
-// Add the request to the RequestQueue.
-                queue.add(stringRequest);
             }
         });
         return inflate;
     }
 
+
+    private void RequetAPI(String match_id){
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        InfoListview = (ListView) getView().findViewById(R.id.info_listview);
+        Information_adapter information_adapter = new Information_adapter(getActivity(), Home_Time, Home_Who, Home_Who_Help, Score, Logo, Away_Time, Away_Who, Away_Who_Help );
+        String url = "https://app.sportdataapi.com/api/v1/soccer/matches/"+match_id+"?apikey=193beda0-5093-11ed-aa03-b339e6eb1617";   //CDM
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Home_Time.clear();
+                            Home_Who.clear();
+                            Home_Who_Help.clear();
+                            Score.clear();
+                            Logo.clear();
+                            Away_Time.clear();
+                            Away_Who.clear();
+                            Away_Who_Help.clear();
+                            TextView HomeTeam = (TextView) getView().findViewById(R.id.HomeTeamMatch);
+                            ImageView HomeTeamFlag = (ImageView) getView().findViewById(R.id.HomeTeamFlagMatch);
+                            TextView AwayTeam = (TextView) getView().findViewById(R.id.AwayTeamMatch);
+                            ImageView AwayTeamFlag = (ImageView) getView().findViewById(R.id.AwayTeamFlagMatch);
+                            TextView Time = (TextView) getView().findViewById(R.id.TimeMatch);
+                            TextView Result = (TextView) getView().findViewById(R.id.ResultMatch);
+                            JSONObject jObject = new JSONObject(response);
+                            JSONObject data = jObject.getJSONObject("data");
+                            String HometeamID = data.getJSONObject("home_team").getString("team_id");
+                            String AwayteamID = data.getJSONObject("away_team").getString("team_id");
+                            int i=0;
+                            if (data.has("match_events") && !data.isNull("match_events")){
+                                JSONArray match_events = data.getJSONArray("match_events");
+                                for (i = 0; i < match_events.length(); i++){
+                                    if (match_events.getJSONObject(i).getString("type").equals("goal")) {
+                                        if (match_events.getJSONObject(i).getString("team_id").equals(HometeamID)) {
+                                            Home_Time.add(match_events.getJSONObject(i).getString("minute"));
+                                            Home_Who.add(match_events.getJSONObject(i).getString("player_name"));
+                                            Home_Who_Help.add(match_events.getJSONObject(i).getString("related_player_name"));
+                                            Score.add(match_events.getJSONObject(i).getString("result"));
+                                            Logo.add(R.drawable.ic_baseline_sports_soccer_24);
+                                            Away_Time.add(" ");
+                                            Away_Who.add(" ");
+                                            Away_Who_Help.add(" ");
+                                        } else {
+                                            Away_Time.add(match_events.getJSONObject(i).getString("minute"));
+                                            Away_Who.add(match_events.getJSONObject(i).getString("player_name"));
+                                            Away_Who_Help.add(match_events.getJSONObject(i).getString("related_player_name"));
+                                            Score.add(match_events.getJSONObject(i).getString("result"));
+                                            Logo.add(R.drawable.ic_baseline_sports_soccer_24);
+                                            Home_Time.add(" ");
+                                            Home_Who.add(" ");
+                                            Home_Who_Help.add(" ");
+                                        }
+                                    }
+                                }
+                            }
+                            HomeTeam.setText(data.getJSONObject("home_team").getString("name"));
+                            AwayTeam.setText(data.getJSONObject("away_team").getString("name"));
+                            HomeTeamFlag.setImageResource(ChooseFlag(data.getJSONObject("home_team").getString("name")));
+                            AwayTeamFlag.setImageResource(ChooseFlag(data.getJSONObject("away_team").getString("name")));
+                            if ((data.getString("status").equals("notstarted"))) {
+                                Time.setText(data.getString("match_start"));
+                                Result.setText(" - ");
+                            } else if (data.getString("status").equals("finished")) {
+                                Time.setText("TER");
+                                Result.setText(data.getJSONObject("stats").getString("ft_score"));
+                            } else {
+                                Time.setText(data.getString("minute"));
+                                Result.setText(Score.get(i));
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        InfoListview.setAdapter(information_adapter);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("That didn't work!");
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
     public int ChooseFlag(String name_team){
         switch (name_team){
             case "Senegal":

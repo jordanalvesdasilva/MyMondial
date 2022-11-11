@@ -6,6 +6,7 @@
    android:layout_height="match_parent"
     android:background="@drawable/gradient"
     tools:context=".Match_Fragment">
+
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -112,13 +113,18 @@
         android:layout_height="match_parent"
         android:layout_below="@id/info"
         >
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RefreshMatch">
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scrollbarSize="0dp"
             android:id="@+id/info_listview"
-            tools:listitem="@layout/info_listview"
-            />
+            tools:listitem="@layout/info_listview" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </RelativeLayout>
 
 

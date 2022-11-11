@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 public class Home_Fragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private ListView MatchListview;
+    SwipeRefreshLayout swipeRefreshLayout;
     private ArrayList<String> HomeTeam = new ArrayList<String>();
     private ArrayList<String> AwayTeam = new ArrayList<String>() ;
     private ArrayList<String> Score = new ArrayList<String>();
@@ -104,59 +106,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
         String current_day = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), current_day, Toast.LENGTH_SHORT).show();
-
-        // REQUEST API FOR MATCH
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-        MatchListview = (ListView) getView().findViewById(R.id.match_live);
-        Match_adapter match_adapter = new Match_adapter(getActivity(), HomeTeam, AwayTeam, Score, Time, HomeTeamFlag, AwayTeamFlag, ID);
-        //String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=1243";  //LDC
-        String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jObject = new JSONObject(response);
-                            JSONArray data = jObject.getJSONArray("data");
-                            switch (current_day) {
-                                case "Journée 1":
-                                    Parse(0,16,data);
-                                    break;
-                                case "Journée 2":
-                                    Parse(16,32,data);
-                                    break;
-                                case "Journée 3":
-                                    Parse(32,48,data);
-                                    break;
-                                case "Huitièmes de finale":
-                                    Parse(48,57,data);
-                                    break;
-                                case "Quarts de finale":
-                                    Parse(57,61,data);
-                                    break;
-                                case "Demi-finales":
-                                    Parse(61,63,data);
-                                    break;
-                                case "Finale":
-                                    Parse(63,64,data);
-                                    break;
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        MatchListview.setAdapter(match_adapter);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("That didn't work!");
-            }
-        });
-
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        RequetAPI(current_day);
 
         MatchListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -172,6 +122,16 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
                 Bundle match_id = new Bundle();
                 match_id.putString("MID", Long.toString(id));
                 getParentFragmentManager().setFragmentResult("match_id",match_id );
+            }
+        });
+
+        swipeRefreshLayout = getView().findViewById(R.id.RefreshHome);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+                RequetAPI(current_day);
+                Toast.makeText(parent.getContext(), "Reloaded", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -221,6 +181,60 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
             e.printStackTrace();
         }
 
+    }
+
+    private void RequetAPI(String current_day){
+        // REQUEST API FOR MATCH
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        MatchListview = (ListView) getView().findViewById(R.id.match_live);
+        Match_adapter match_adapter = new Match_adapter(getActivity(), HomeTeam, AwayTeam, Score, Time, HomeTeamFlag, AwayTeamFlag, ID);
+        //String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=1243";  //LDC
+        String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jObject = new JSONObject(response);
+                            JSONArray data = jObject.getJSONArray("data");
+                            switch (current_day) {
+                                case "Journée 1":
+                                    Parse(0,16,data);
+                                    break;
+                                case "Journée 2":
+                                    Parse(16,32,data);
+                                    break;
+                                case "Journée 3":
+                                    Parse(32,48,data);
+                                    break;
+                                case "Huitièmes de finale":
+                                    Parse(48,57,data);
+                                    break;
+                                case "Quarts de finale":
+                                    Parse(57,61,data);
+                                    break;
+                                case "Demi-finales":
+                                    Parse(61,63,data);
+                                    break;
+                                case "Finale":
+                                    Parse(63,64,data);
+                                    break;
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        match_adapter.notifyDataSetChanged();
+                        MatchListview.setAdapter(match_adapter);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("That didn't work!");
+            }
+
+        });
+        queue.add(stringRequest);
     }
 
     public int ChooseFlag(String name_team){
