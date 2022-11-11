@@ -3,23 +3,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Joueurs_Fragment">
+    android:background="@drawable/gradient">
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/Texte_Joueur"
+        android:layout_marginTop="5dp"
         android:id="@+id/joueurs_live"
         android:divider="@color/white"
         tools:listitem="@layout/activity_joueurs_listview"
         android:dividerHeight="1px" />
 
-    <Spinner
-        android:id="@+id/spinner_joueurs"
+    <TextView
+        android:id="@+id/Texte_Classement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:text="Classement des Buteurs :"
+        android:textSize="30dp"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp"/>
+        android:layout_marginTop="25dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/Texte_Rang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Texte_Classement"
+        android:text="Rang"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/Texte_Joueur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Texte_Classement"
+        android:text="Joueur"
+        android:textSize="23dp"
+        android:layout_toRightOf="@+id/Texte_Rang"
+        android:textStyle="bold"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/Texte_Buts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Texte_Classement"
+        android:text="Buts"
+        android:textSize="23dp"
+        android:layout_toLeftOf="@+id/Texte_MinJoue"
+        android:textStyle="bold"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/Texte_MinJoue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Texte_Classement"
+        android:text="Min"
+        android:textSize="23dp"
+        android:layout_alignParentRight="true"
+        android:textStyle="bold"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/black"/>
+
 
 </RelativeLayout>

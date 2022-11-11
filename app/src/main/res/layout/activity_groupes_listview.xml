@@ -42,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Equipes"
+        android:textColor="@color/black"
         android:textSize="16dp"
         android:textStyle="bold" />
     <ImageView
@@ -112,6 +113,7 @@
                 android:text="M"
                 android:textSize="16dp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:layout_centerHorizontal="true" />
             <TextView
                 android:id="@+id/E1_match_joue"
@@ -165,6 +167,7 @@
                 android:text="V"
                 android:textSize="16dp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:layout_centerHorizontal="true" />
             <TextView
                 android:id="@+id/E1_victoire"
@@ -222,6 +225,7 @@
                 android:text="D"
                 android:textSize="16dp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:layout_centerHorizontal="true"/>
             <TextView
                 android:id="@+id/E1_defaite"
@@ -279,6 +283,7 @@
                 android:text="N"
                 android:textSize="16dp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:layout_centerHorizontal="true"/>
             <TextView
                 android:id="@+id/E1_nul"
@@ -286,7 +291,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:text="N1"
-                android:textColor="@color/white"
+                android:textColor="#FF9800"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"/>
@@ -296,7 +301,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="90dp"
                 android:text="N2"
-                android:textColor="@color/white"
+                android:textColor="#FF9800"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"/>
@@ -306,7 +311,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="145dp"
                 android:text="N3"
-                android:textColor="@color/white"
+                android:textColor="#FF9800"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"/>
@@ -316,7 +321,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="200dp"
                 android:text="N4"
-                android:textColor="@color/white"
+                android:textColor="#FF9800"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"/>
@@ -336,6 +341,7 @@
                 android:text="Points"
                 android:textSize="16dp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:layout_centerHorizontal="true"/>
             <TextView
                 android:id="@+id/E1_point"
