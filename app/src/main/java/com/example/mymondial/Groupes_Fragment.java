@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 public class Groupes_Fragment extends Fragment {
 
     private ListView GroupesListview;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private ArrayList<String> Groupe_name = new ArrayList<String>();
     // EQUIPE 1

@@ -17,17 +17,17 @@ public class Joueurs_adapter extends BaseAdapter {
     ArrayList<String> Player_Rang = new ArrayList<String>();
     ArrayList<String> Player_Name = new ArrayList<String>();
     ArrayList<String> Player_Stats = new ArrayList<String>();
-    ArrayList<String> Player_Min = new ArrayList<String>();
+    ArrayList<String> Player_Match = new ArrayList<String>();
     ArrayList<Integer> Player_Flag = new ArrayList<Integer>();
 
     LayoutInflater inflater ;
 
-    public Joueurs_adapter(Context context, ArrayList<String> Player_Rang, ArrayList<String> Player_Name, ArrayList<String> Player_Stats, ArrayList<String> Player_Min, ArrayList<Integer> Player_Flag){
+    public Joueurs_adapter(Context context, ArrayList<String> Player_Rang, ArrayList<String> Player_Name, ArrayList<String> Player_Stats, ArrayList<String> Player_Match, ArrayList<Integer> Player_Flag){
         this.context=context;
         this.Player_Rang=Player_Rang;
         this.Player_Name=Player_Name;
         this.Player_Stats=Player_Stats;
-        this.Player_Min=Player_Min;
+        this.Player_Match=Player_Match;
         this.Player_Flag= Player_Flag;
         inflater = LayoutInflater.from(context);
 
@@ -53,13 +53,13 @@ public class Joueurs_adapter extends BaseAdapter {
         TextView PlayerRangView = (TextView) convertView.findViewById(R.id.Player_Rang);
         TextView PlayerNameView = (TextView) convertView.findViewById(R.id.Player_Name);
         TextView PlayerStatsView = (TextView) convertView.findViewById(R.id.Player_Stats);
-        TextView PlayerMinView = (TextView) convertView.findViewById(R.id.Player_Min);
+        TextView PlayerMatchView = (TextView) convertView.findViewById(R.id.Player_Match);
         ImageView PlayerFlagView = (ImageView) convertView.findViewById(R.id.Player_Flag);
 
         PlayerRangView.setText(Player_Rang.get(position));
         PlayerNameView.setText(Player_Name.get(position));
         PlayerStatsView.setText(Player_Stats.get(position));
-        PlayerMinView.setText(Player_Min.get(position));
+        PlayerMatchView.setText(Player_Match.get(position));
         PlayerFlagView.setImageResource(Player_Flag.get(position));
 
         return convertView;
