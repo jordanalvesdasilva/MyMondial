@@ -115,7 +115,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager() ;
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.Layout, new Match_Fragment());
+                fragmentTransaction.replace(R.id.Layout, new Match_Fragment(), "Match_Fragment");
                 fragmentTransaction.commit();
 
                 System.out.println(id);
