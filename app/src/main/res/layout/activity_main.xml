@@ -29,12 +29,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#97E5F8"
-            app:logo="@drawable/_7584041_ic_ne_de_ballon_de_football_conception_de_cadre_bleu_illustration_vectorielle"
+            app:logo="@drawable/logo_petit_black"
             app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
             app:title="MyMondial"
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Display1"
-            app:titleMarginStart="80dp"
+            app:titleMarginStart="75dp"
             app:titleTextColor="@color/black"
-            app:contentInsetStart="75dp"/>
+            app:contentInsetStart="70dp"/>
 
 </RelativeLayout>

@@ -17,8 +17,9 @@ public class ChargementActivity extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(new Intent(ChargementActivity.this, MainActivity.class));
+                finish();
             }
-        },2000);
+        },2030);
 
     }
 }

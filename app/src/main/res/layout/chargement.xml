@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/animation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layoutDescription="@xml/chargement_scene2"
     tools:context=".ChargementActivity">
 
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="200dp"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentLeft="true"
-    android:background="@drawable/gradient"
-    />
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:background="@drawable/gradient"
+        app:layout_constraintLeft_toLeftOf="@+id/animation"
+        app:layout_constraintRight_toRightOf="@+id/animation"
+        app:layout_constraintTop_toTopOf="@+id/animation" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/gradient_inverse"
+        app:layout_constraintBottom_toBottomOf="@+id/animation"
+        app:layout_constraintLeft_toLeftOf="@+id/animation"
+        app:layout_constraintRight_toRightOf="@+id/animation" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         app:srcCompat="@drawable/logo"
-        android:layout_centerInParent="true"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/gradient_inverse"
-        />
-</RelativeLayout>
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
