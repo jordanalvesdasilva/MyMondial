@@ -19,7 +19,7 @@ public class ChargementActivity extends AppCompatActivity {
                 startActivity(new Intent(ChargementActivity.this, MainActivity.class));
                 finish();
             }
-        },2030);
+        },2050);
 
     }
 }
