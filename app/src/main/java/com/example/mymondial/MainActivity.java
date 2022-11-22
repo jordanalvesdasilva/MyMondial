@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.joueur:
                     replaceFragment(new Joueurs_Fragment(), "Joueurs_Fragment");
                     break;
+                case R.id.phasefinale:
+                    replaceFragment(new PhaseFinale_Fragment(), "PhaseFinale_Fragment");
+                    break;
             }
             return true;
         });

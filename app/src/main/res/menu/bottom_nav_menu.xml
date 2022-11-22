@@ -13,4 +13,8 @@
         android:icon="@drawable/ic_baseline_query_stats_24"
         android:id="@+id/joueur"
         />
+    <item android:title="Phase Finale"
+        android:icon="@drawable/ic_baseline_star_purple500_24"
+        android:id="@+id/phasefinale"
+        />
 </menu>
