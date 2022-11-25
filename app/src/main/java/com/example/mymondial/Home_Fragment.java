@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,8 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -154,28 +151,28 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
             AwayTeamFlag.clear();
             ID.clear();
             for (int i = min; i <max; i++) {
-                ID.add(data.getJSONObject(i).getString("id"));
-                if (data.getJSONObject(i).has("home_team_en")) {
-                    HomeTeam.add(data.getJSONObject(i).getString("home_team_en"));
-                    AwayTeam.add(data.getJSONObject(i).getString("away_team_en"));
-                    HomeTeamFlag.add(ChooseFlag(data.getJSONObject(i).getString("home_team_en")));
-                    AwayTeamFlag.add(ChooseFlag(data.getJSONObject(i).getString("away_team_en")));
+                ID.add(data.getJSONObject(i).getString("match_id"));
+                if (data.getJSONObject(i).getJSONObject("home_team").has("name")) {
+                    HomeTeam.add(data.getJSONObject(i).getJSONObject("home_team").getString("name"));
+                    AwayTeam.add(data.getJSONObject(i).getJSONObject("away_team").getString("name"));
+                    HomeTeamFlag.add(ChooseFlag(data.getJSONObject(i).getJSONObject("home_team").getString("name")));
+                    AwayTeamFlag.add(ChooseFlag(data.getJSONObject(i).getJSONObject("away_team").getString("name")));
                 } else {
                     HomeTeam.add("not found");
                     AwayTeam.add("not found");
                 }
-                if ((data.getJSONObject(i).getString("time_elapsed").equals("notstarted"))) {
-                    Time.add(data.getJSONObject(i).getString("local_date"));
+                if ((data.getJSONObject(i).getString("status").equals("notstarted"))) {
+                    Time.add(data.getJSONObject(i).getString("match_start"));
                     Score.add("  -  ");
-                } else if (data.getJSONObject(i).getString("time_elapsed").equals("finished")) {
+                } else if (data.getJSONObject(i).getString("status").equals("finished")) {
                     Time.add("TER");
-                    String ScoreHome = data.getJSONObject(i).getString("home_score");
-                    String ScoreAway = data.getJSONObject(i).getString("away_score");
+                    String ScoreHome = data.getJSONObject(i).getJSONObject("stats").getString("home_score");
+                    String ScoreAway = data.getJSONObject(i).getJSONObject("stats").getString("away_score");
                     Score.add(ScoreHome + "-" +ScoreAway);
                 } else {
-                    Time.add("LIVE");
-                    String ScoreHome = data.getJSONObject(i).getString("home_score");
-                    String ScoreAway = data.getJSONObject(i).getString("away_score");
+                    Time.add(data.getJSONObject(i).getString("minute"));
+                    String ScoreHome = data.getJSONObject(i).getJSONObject("stats").getString("home_score");
+                    String ScoreAway = data.getJSONObject(i).getJSONObject("stats").getString("away_score");
                     Score.add(ScoreHome + "-" +ScoreAway);
                 }
             }
@@ -191,15 +188,14 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         MatchListview = (ListView) getView().findViewById(R.id.match_live);
         Match_adapter match_adapter = new Match_adapter(getActivity(), HomeTeam, AwayTeam, Score, Time, HomeTeamFlag, AwayTeamFlag, ID);
-        //String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM API1
-        String url ="http://api.cup2022.ir/api/v1/match";
+        //String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=1243";  //LDC
+        String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jObject = new JSONObject(response);
-                            System.out.println(response);
                             JSONArray data = jObject.getJSONArray("data");
                             switch (current_day) {
                                 case "Journée 1":
@@ -235,17 +231,9 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println("That didn't work!");
-                System.out.println(error);
             }
 
-        })
-        {@Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> headerMap = new HashMap<String, String>();
-            headerMap.put("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzdjZWY5NDQ4NzA5MjMzZmRhMzNhODIiLCJpYXQiOjE2NjkxMzIxODEsImV4cCI6MTY2OTIxODU4MX0.CZ_Y-fKKZ3VHr1sUJaxvPvEiyXe2IvmSYA-V5rCEHKU");
-            headerMap.put("Content-Type", "application/json");
-            return headerMap;}
-        };
+        });
         queue.add(stringRequest);
     }
 
@@ -253,7 +241,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
         switch (name_team){
             case "Senegal":
                 return Flag[26];
-            case "Nederlands":
+            case "Netherlands":
                 return Flag[20];
             case "England":
                 return Flag[1];
@@ -263,7 +251,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
                 return Flag[24];
             case "Ecuador":
                 return Flag[12];
-            case "United States":
+            case "USA":
                 return Flag[31];
             case "Wales":
                 return Flag[21];
@@ -305,7 +293,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
                 return Flag[7];
             case "Uruguay":
                 return Flag[30];
-            case "South Korea":
+            case "Republic of Korea":
                 return Flag[25];
             case "Portugal":
                 return Flag[23];
