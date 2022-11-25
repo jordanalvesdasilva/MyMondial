@@ -125,7 +125,8 @@ public class Groupes_Fragment extends Fragment {
                 E3_flag, E3_name, E3_match_joue, E3_victoire, E3_defaite, E3_nul, E3_point,
                 E4_flag, E4_name, E4_match_joue, E4_victoire, E4_defaite, E4_nul, E4_point,
                 Groupe_name);
-        String url = "https://app.sportdataapi.com/api/v1/soccer/standings?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=3072";   //CDM
+        String url = "https://app.sportdataapi.com/api/v1/soccer/standings?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=1193";   //CDM 2018
+        //String url = "https://app.sportdataapi.com/api/v1/soccer/standings?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=3072";   //CDM 2022
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -259,7 +260,7 @@ public class Groupes_Fragment extends Fragment {
     }
 
 
-    private int ChooseFlag(String name_team){
+    public int ChooseFlag(String name_team){
         switch (name_team){
             case "Senegal":
                 return Flag[26];
@@ -325,8 +326,9 @@ public class Groupes_Fragment extends Fragment {
                 return Flag[6];
             case "Serbia":
                 return Flag[27];
+            default:
+                return R.drawable.ic_baseline_flag_24;
         }
-        return 0;
     }
     private String IdPays (String Team_id){
         switch (Team_id){
@@ -394,8 +396,9 @@ public class Groupes_Fragment extends Fragment {
                 return "Portugal";
             case "12501":
                 return "Uruguay";
+            default:
+                return "rien";
         }
-        return null;
     }
 
     private String IdGroupe(String numero){
