@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minHeight="80dp">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -23,25 +22,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:background="@drawable/gradient">
-        <ImageButton
-            android:id="@+id/quatar"
+        android:background="@drawable/gradient"
+        >
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="75dp"
             android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/worldcupqatar"
-            android:background="#00DFD6D6"/>
+            android:layout_centerVertical="true">
+            <ImageButton
+                android:id="@+id/quatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/worldcupqatar"
+                android:background="#00DFD6D6"/>
 
-        <ImageButton
-            android:id="@+id/russia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="75dp"
-            android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/worldcuprussia"
-            android:background="#00DFD6D6"/>
-
+            <ImageButton
+                android:id="@+id/russia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/quatar"
+                android:layout_marginTop="50dp"
+                app:srcCompat="@drawable/worldcuprussia"
+                android:background="#00DFD6D6"/>
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
