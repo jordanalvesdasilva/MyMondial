@@ -66,7 +66,7 @@ public class Groupes_Fragment extends Fragment {
     private ArrayList<String> E4_point = new ArrayList<String>();
 
     // DRAPEAUX PAYS
-    private int Flag[] = {R.drawable.allemagne, R.drawable.angleterre, R.drawable.arabie_saoudite, R.drawable.argentine, R.drawable.australie, R.drawable.belgique, R.drawable.bresil, R.drawable.cameroun, R.drawable.canada, R.drawable.croatie, R.drawable.costa_rica, R.drawable.danemark, R.drawable.equateur, R.drawable.espagne, R.drawable.france, R.drawable.ghana, R.drawable.iran, R.drawable.japon, R.drawable.maroc, R.drawable.mexique, R.drawable.pays_bas, R.drawable.pays_de_galles, R.drawable.pologne, R.drawable.portugal, R.drawable.quatar, R.drawable.republique_de_coree, R.drawable.senegal, R.drawable.serbie, R.drawable.suisse, R.drawable.tunisie, R.drawable.uruguay, R.drawable.usa};
+    public int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa,R.drawable.colombie, R.drawable.panama, R.drawable.suede,R.drawable.nigeria,R.drawable.perou,R.drawable.iceland,R.drawable.egypte,R.drawable.russie };
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -125,8 +125,14 @@ public class Groupes_Fragment extends Fragment {
                 E3_flag, E3_name, E3_match_joue, E3_victoire, E3_defaite, E3_nul, E3_point,
                 E4_flag, E4_name, E4_match_joue, E4_victoire, E4_defaite, E4_nul, E4_point,
                 Groupe_name);
-        String url = "https://app.sportdataapi.com/api/v1/soccer/standings?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=1193";   //CDM 2018
-        //String url = "https://app.sportdataapi.com/api/v1/soccer/standings?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=3072";   //CDM 2022
+        String url;
+        String  years = ((Global_variable) getActivity().getApplication()).getyears();
+        if (years.equals("2018")){
+            url = "https://app.sportdataapi.com/api/v1/soccer/standings?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=1193";   //CDM 2018
+        }
+        else {
+            url = "https://app.sportdataapi.com/api/v1/soccer/standings?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=3072";   //CDM 2022
+        }
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -326,6 +332,22 @@ public class Groupes_Fragment extends Fragment {
                 return Flag[6];
             case "Serbia":
                 return Flag[27];
+            case "Colombia":
+                return Flag[32];
+            case "Panama":
+                return Flag[33];
+            case "Sweden":
+                return Flag[34];
+            case "Nigeria":
+                return Flag[35];
+            case "Peru":
+                return Flag[36];
+            case "Iceland":
+                return Flag[37];
+            case "Egypt":
+                return Flag[38];
+            case "Russia":
+                return Flag[39];
             default:
                 return R.drawable.ic_baseline_flag_24;
         }
@@ -333,6 +355,8 @@ public class Groupes_Fragment extends Fragment {
     private String IdPays (String Team_id){
         switch (Team_id){
             case "14220" :
+                return "Costa Rica";
+            case "7841":
                 return "Costa Rica";
             case "3017":
                 return "Germany";
@@ -372,6 +396,8 @@ public class Groupes_Fragment extends Fragment {
                 return "Tunisia";
             case "14219":
                 return "Australia";
+            case "747":
+                return "Australia";
             case "3054":
                 return "Belgium";
             case "7835":
@@ -396,8 +422,24 @@ public class Groupes_Fragment extends Fragment {
                 return "Portugal";
             case "12501":
                 return "Uruguay";
+            case "12431":
+                return "Russia";
+            case "24":
+                return "Egypt";
+            case "3029":
+                return "Iceland";
+            case "12503":
+                return "Peru";
+            case "37":
+                return "Nigeria";
+            case "3078":
+                return "Sweden";
+            case "12340":
+                return "Panama";
+            case "12365":
+                return "Colombia";
             default:
-                return "rien";
+                return " ";
         }
     }
 
@@ -420,7 +462,7 @@ public class Groupes_Fragment extends Fragment {
             case "7":
                 return "H";
             default:
-                return "Z";
+                return " ";
         }
     }
 

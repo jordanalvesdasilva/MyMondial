@@ -16,10 +16,10 @@ public class ChargementActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(ChargementActivity.this, MainActivity.class));
+                startActivity(new Intent(ChargementActivity.this, FirstActivity.class));
                 finish();
             }
-        },2050);
+        },2100);
 
     }
 }

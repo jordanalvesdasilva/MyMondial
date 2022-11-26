@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="80dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#97E5F8"
+        app:logo="@drawable/logo_petit_black"
+        app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
+        app:title="MyMondial"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:titleMarginStart="75dp"
+        app:titleTextColor="@color/black"
+        app:contentInsetStart="70dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/gradient">
+        <ImageButton
+            android:id="@+id/quatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/worldcupqatar"
+            android:background="#00DFD6D6"/>
+
+        <ImageButton
+            android:id="@+id/russia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="75dp"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/worldcuprussia"
+            android:background="#00DFD6D6"/>
+
+    </RelativeLayout>
+</RelativeLayout>

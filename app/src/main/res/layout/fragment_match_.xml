@@ -83,15 +83,19 @@
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 </RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/TETE"
+    android:layout_marginTop="10dp"
+    android:id="@+id/info"
+    android:layout_centerHorizontal="true"
+   >
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TETE"
-        android:layout_marginTop="10dp"
-        android:id="@+id/info"
         android:layout_centerHorizontal="true"
-       >
-
+        android:id="@+id/information">
         <ImageView
             android:id="@+id/information_icone"
             android:layout_width="50dp"
@@ -109,23 +113,193 @@
             />
     </RelativeLayout>
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/info"
-        >
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/RefreshMatch">
-        <ListView
+        android:layout_below="@id/information"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@id/titre"
+        android:layout_marginRight="30dp">
+        <TextView
+            android:id="@+id/homeTir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scrollbarSize="0dp"
-            android:id="@+id/info_listview"
-            tools:listitem="@layout/info_listview" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
+            android:textSize="25dp"
+            android:text="0" />
+        <TextView
+            android:id="@+id/homeTirCadre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/homeTir"
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:text="0" />
+        <TextView
+            android:id="@+id/homeCorner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/homeTirCadre"
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:text="0" />
+        <TextView
+            android:id="@+id/homeCartonJaune"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/homeCorner"
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:text="0" />
+        <TextView
+            android:id="@+id/homeCartonRouge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/homeCartonJaune"
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:text="0" />
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/information"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/titre">
+        <TextView
+            android:id="@+id/Tir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
+            android:text="Tir" />
+        <TextView
+            android:id="@+id/TirCadre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Tir"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="Tir Cadré" />
+        <TextView
+            android:id="@+id/Corner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TirCadre"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="Corner" />
+        <TextView
+            android:id="@+id/CartonJaune"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Corner"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="Carton Jaune" />
+        <TextView
+            android:id="@+id/CartonRouge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/CartonJaune"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="Carton Rouge" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/information"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/titre"
+        android:layout_marginLeft="30dp">
+        <TextView
+            android:id="@+id/awayTir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="0" />
+        <TextView
+            android:id="@+id/awayTirCdre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/awayTir"
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:text="0" />
+        <TextView
+            android:id="@+id/awayCorner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/awayTirCdre"
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:text="0" />
+        <TextView
+            android:id="@+id/awayCartonJaune"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/awayCorner"
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:text="0" />
+        <TextView
+            android:id="@+id/awayCartonRouge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/awayCartonJaune"
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:text="0" />
+    </RelativeLayout>
+</RelativeLayout>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/info"
+    android:layout_marginTop="20dp"
+    android:id="@+id/scorers"
+    android:layout_centerHorizontal="true"
+    >
+
+    <ImageView
+        android:id="@+id/scorers_icone"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_baseline_sports_soccer_24" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scorers"
+        android:layout_toRightOf="@id/scorers_icone"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:textSize="30dp"
+        android:id="@+id/scorers_text"
+        android:textStyle="bold"
+        />
+</RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/scorers"
+    >
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/RefreshMatch">
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbarSize="0dp"
+        android:id="@+id/info_listview"
+        tools:listitem="@layout/info_listview" />
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</RelativeLayout>
 
 
 </RelativeLayout>

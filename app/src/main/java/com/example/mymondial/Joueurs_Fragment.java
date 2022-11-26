@@ -34,9 +34,6 @@ public class Joueurs_Fragment extends Fragment {
     private ArrayList<String> Player_Name = new ArrayList<String>();
     private ArrayList<String> Player_Stats = new ArrayList<String>();
     private ArrayList<String> Player_Match = new ArrayList<String>();
-    private ArrayList<Integer> Player_Flag = new ArrayList<Integer>();
-
-    public int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa };
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -88,9 +85,15 @@ public class Joueurs_Fragment extends Fragment {
         // REQUEST API FOR MATCH
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         JoueursListview = (ListView) inflate.findViewById(R.id.joueurs_live);
-        Joueurs_adapter joueurs_adapter = new Joueurs_adapter(getActivity(), Player_Rang, Player_Name, Player_Stats, Player_Match, Player_Flag);
-        String url = "https://app.sportdataapi.com/api/v1/soccer/topscorers?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=1193";   // CDM 2018
-        //String url = "https://app.sportdataapi.com/api/v1/soccer/topscorers?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=3072";   // CDM 2022
+        Joueurs_adapter joueurs_adapter = new Joueurs_adapter(getActivity(), Player_Rang, Player_Name, Player_Stats, Player_Match);
+        String url;
+        String  years = ((Global_variable) getActivity().getApplication()).getyears();
+        if (years.equals("2018")){
+            url = "https://app.sportdataapi.com/api/v1/soccer/topscorers?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=1193";   //CDM 2018
+        }
+        else {
+            url = "https://app.sportdataapi.com/api/v1/soccer/topscorers?apikey=54137fd0-5dd7-11ed-8fe2-912a4280ead9&season_id=3072";   //CDM 2022
+        }
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -127,7 +130,6 @@ public class Joueurs_Fragment extends Fragment {
             Player_Name.clear();
             Player_Stats.clear();
             Player_Match.clear();
-            Player_Flag.clear();
             for (int i = min; i <max; i++) {
 
                 // ------------------------------------------- TEST AVEC CDM 2018 --------------------------------------------------------------
@@ -136,8 +138,6 @@ public class Joueurs_Fragment extends Fragment {
                 Player_Stats.add(data.getJSONObject(i).getJSONObject("goals").getString("overall"));
                 Player_Match.add(data.getJSONObject(i).getString("matches_played"));
 
-                Player_Flag.add(ChooseFlag(data.getJSONObject(i).getJSONObject("team").getString("team_name")));
-
             }
         }
         catch (JSONException e) {
@@ -145,77 +145,5 @@ public class Joueurs_Fragment extends Fragment {
         }
 
     }
-
-        public int ChooseFlag(String name_team){
-            switch (name_team){
-                case "Senegal":
-                    return Flag[26];
-                case "Netherlands":
-                    return Flag[20];
-                case "England":
-                    return Flag[1];
-                case "Iran":
-                    return Flag[16];
-                case "Qatar":
-                    return Flag[24];
-                case "Ecuador":
-                    return Flag[12];
-                case "USA":
-                    return Flag[31];
-                case "Wales":
-                    return Flag[21];
-                case "Argentina":
-                    return Flag[3];
-                case "Saudi Arabia":
-                    return Flag[2];
-                case "Denmark":
-                    return Flag[11];
-                case "Tunisia":
-                    return Flag[29];
-                case "Mexico":
-                    return Flag[19];
-                case "Poland":
-                    return Flag[22];
-                case "France":
-                    return Flag[14];
-                case "Australia":
-                    return Flag[4];
-                case "Morocco":
-                    return Flag[18];
-                case "Croatia":
-                    return Flag[9];
-                case "Germany":
-                    return Flag[0];
-                case "Japan":
-                    return Flag[17];
-                case "Spain":
-                    return Flag[13];
-                case "Costa Rica":
-                    return Flag[10];
-                case "Belgium":
-                    return Flag[5];
-                case "Canada":
-                    return Flag[8];
-                case "Switzerland":
-                    return Flag[28];
-                case "Cameroon":
-                    return Flag[7];
-                case "Uruguay":
-                    return Flag[30];
-                case "Republic of Korea":
-                    return Flag[25];
-                case "Portugal":
-                    return Flag[23];
-                case "Ghana":
-                    return Flag[15];
-                case "Brazil":
-                    return Flag[6];
-                case "Serbia":
-                    return Flag[27];
-                default:
-                    return R.drawable.ic_baseline_flag_24;
-            }
-        }
-
 
 }

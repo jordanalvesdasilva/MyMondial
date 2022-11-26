@@ -12,30 +12,23 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:text="10"
         android:textSize="25dp"
         android:textStyle="bold"
         android:id="@+id/Player_Rang"/>
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="35dp"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/Player_Rang"
-        android:layout_marginLeft="15dp"
-        app:srcCompat="@drawable/pologne"
-        android:id="@+id/Player_Flag"/>
+
 
     <TextView
         android:id="@+id/Player_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_toRightOf="@+id/Player_Flag"
+        android:layout_toRightOf="@+id/Player_Rang"
         android:layout_toLeftOf="@+id/Player_Match"
         android:text="R.Lewandowski"
         android:layout_marginRight="20dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="35dp"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_centerVertical="true"/>
@@ -47,7 +40,7 @@
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/Player_Stats"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginRight="65dp"
         android:text="12"
         android:textSize="25dp"
         android:textStyle="bold" />
@@ -59,7 +52,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="20dp"
         android:text="20"
         android:textSize="25dp"
         android:textStyle="bold" />

@@ -44,7 +44,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
     private ArrayList<Integer> HomeTeamFlag = new ArrayList<Integer>();
     private ArrayList<Integer> AwayTeamFlag = new ArrayList<Integer>();
     private ArrayList<String> ID = new ArrayList<String>();
-    public int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa };
+    public int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa,R.drawable.colombie, R.drawable.panama, R.drawable.suede,R.drawable.nigeria,R.drawable.perou,R.drawable.iceland,R.drawable.egypte,R.drawable.russie };
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -170,7 +170,12 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
                     String ScoreAway = data.getJSONObject(i).getJSONObject("stats").getString("away_score");
                     Score.add(ScoreHome + "-" +ScoreAway);
                 } else {
-                    Time.add(data.getJSONObject(i).getString("minute"));
+                    if (data.getJSONObject(i).getString("minute").equals("null")){
+                        Time.add("TER");
+                    }
+                    else {
+                        Time.add(data.getJSONObject(i).getString("minute"));
+                    }
                     String ScoreHome = data.getJSONObject(i).getJSONObject("stats").getString("home_score");
                     String ScoreAway = data.getJSONObject(i).getJSONObject("stats").getString("away_score");
                     Score.add(ScoreHome + "-" +ScoreAway);
@@ -188,8 +193,14 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         MatchListview = (ListView) getView().findViewById(R.id.match_live);
         Match_adapter match_adapter = new Match_adapter(getActivity(), HomeTeam, AwayTeam, Score, Time, HomeTeamFlag, AwayTeamFlag, ID);
-        String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=1193";   //CDM 2018
-        //String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM 2022
+        String url;
+        String  years = ((Global_variable) getActivity().getApplication()).getyears();
+        if (years.equals("2018")){
+            url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=1193";   //CDM 2018
+        }
+        else {
+            url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM 2022
+        }
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -208,13 +219,13 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
                                     Parse(32,48,data);
                                     break;
                                 case "Huitièmes de finale":
-                                    Parse(48,57,data);
+                                    Parse(48,56,data);
                                     break;
                                 case "Quarts de finale":
-                                    Parse(57,61,data);
+                                    Parse(56,60,data);
                                     break;
                                 case "Demi-finales":
-                                    Parse(61,63,data);
+                                    Parse(60,62,data);
                                     break;
                                 case "Finale":
                                     Parse(63,64,data);
@@ -303,6 +314,22 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
                 return Flag[6];
             case "Serbia":
                 return Flag[27];
+            case "Colombia":
+                return Flag[32];
+            case "Panama":
+                return Flag[33];
+            case "Sweden":
+                return Flag[34];
+            case "Nigeria":
+                return Flag[35];
+            case "Peru":
+                return Flag[36];
+            case "Iceland":
+                return Flag[37];
+            case "Egypt":
+                return Flag[38];
+            case "Russia":
+                return Flag[39];
             default:
                 return R.drawable.ic_baseline_flag_24;
         }

@@ -26,8 +26,8 @@ import org.json.JSONObject;
  * create an instance of this fragment.
  */
 public class PhaseFinale_Fragment extends Fragment {
-    
-    public int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa };
+
+    public int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa,R.drawable.colombie, R.drawable.panama, R.drawable.suede,R.drawable.nigeria,R.drawable.perou,R.drawable.iceland,R.drawable.egypte,R.drawable.russie };
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -146,8 +146,14 @@ public class PhaseFinale_Fragment extends Fragment {
         TextView FinaleAwayScore1 = (TextView) inflate.findViewById(R.id.FinaleAwayScore1);
         // REQUEST API FOR MATCH
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        //String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM 2022
-        String url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=1193";   //CDM
+        String url;
+        String  years = ((Global_variable) getActivity().getApplication()).getyears();
+        if (years.equals("2018")){
+            url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=1193";   //CDM 2018
+        }
+        else {
+            url = "https://app.sportdataapi.com/api/v1/soccer/matches?apikey=193beda0-5093-11ed-aa03-b339e6eb1617&season_id=3072";   //CDM 2022
+        }
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -234,8 +240,8 @@ public class PhaseFinale_Fragment extends Fragment {
         });
         queue.add(stringRequest);
     }
-    
-    
+
+
     public int ChooseFlag(String name_team){
         switch (name_team){
             case "Senegal":
@@ -302,6 +308,22 @@ public class PhaseFinale_Fragment extends Fragment {
                 return Flag[6];
             case "Serbia":
                 return Flag[27];
+            case "Colombia":
+                return Flag[32];
+            case "Panama":
+                return Flag[33];
+            case "Sweden":
+                return Flag[34];
+            case "Nigeria":
+                return Flag[35];
+            case "Peru":
+                return Flag[36];
+            case "Iceland":
+                return Flag[37];
+            case "Egypt":
+                return Flag[38];
+            case "Russia":
+                return Flag[39];
             default:
                 return R.drawable.ic_baseline_flag_24;
         }

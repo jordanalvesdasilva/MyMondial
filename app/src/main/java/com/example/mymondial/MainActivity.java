@@ -1,5 +1,6 @@
 package com.example.mymondial;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -96,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
                 Fragment currentFragment = fragmentManager.findFragmentById(R.id.Layout);
                 if (currentFragment.getTag().equals("Match_Fragment")){
                     replaceFragment(new Home_Fragment(), "Home_Fragment");
+                }
+                if (currentFragment.getTag().equals("Home_Fragment") || currentFragment.getTag().equals("Groupes_Fragment") || currentFragment.getTag().equals("Joueurs_Fragment") || currentFragment.getTag().equals("PhaseFinale_Fragment")){
+                    startActivity(new Intent(MainActivity.this, FirstActivity.class));
+                    finish();
                 }
             }
             return true;

@@ -43,7 +43,7 @@ public class Match_Fragment extends Fragment {
     private ArrayList<String> Away_Time= new ArrayList<String>();
     private ArrayList<String> Away_Who= new ArrayList<String>();
     private ArrayList<String> Away_Who_Help= new ArrayList<String>();
-    public int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa };
+    public int Flag []= {R.drawable.allemagne,R.drawable.angleterre,R.drawable.arabie_saoudite,R.drawable.argentine,R.drawable.australie,R.drawable.belgique,R.drawable.bresil,R.drawable.cameroun,R.drawable.canada,R.drawable.croatie,R.drawable.costa_rica,R.drawable.danemark,R.drawable.equateur,R.drawable.espagne,R.drawable.france,R.drawable.ghana,R.drawable.iran,R.drawable.japon,R.drawable.maroc,R.drawable.mexique,R.drawable.pays_bas,R.drawable.pays_de_galles,R.drawable.pologne,R.drawable.portugal,R.drawable.quatar,R.drawable.republique_de_coree,R.drawable.senegal,R.drawable.serbie,R.drawable.suisse,R.drawable.tunisie,R.drawable.uruguay,R.drawable.usa,R.drawable.colombie, R.drawable.panama, R.drawable.suede,R.drawable.nigeria,R.drawable.perou,R.drawable.iceland,R.drawable.egypte,R.drawable.russie };
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -136,6 +136,19 @@ public class Match_Fragment extends Fragment {
                             ImageView AwayTeamFlag = (ImageView) getView().findViewById(R.id.AwayTeamFlagMatch);
                             TextView Time = (TextView) getView().findViewById(R.id.TimeMatch);
                             TextView Result = (TextView) getView().findViewById(R.id.ResultMatch);
+                            TextView homeTir = (TextView) getView().findViewById(R.id.homeTir);
+                            TextView homeTirCadre = (TextView) getView().findViewById(R.id.homeTirCadre);
+                            TextView homeCorner = (TextView) getView().findViewById(R.id.homeCorner);
+                            TextView homeCartonJaune = (TextView) getView().findViewById(R.id.homeCartonJaune);
+                            TextView homeCartonRouge = (TextView) getView().findViewById(R.id.homeCartonRouge);
+                            TextView awayTir = (TextView) getView().findViewById(R.id.awayTir);
+                            TextView awayTirCadre = (TextView) getView().findViewById(R.id.awayTirCdre);
+                            TextView awayCorner = (TextView) getView().findViewById(R.id.awayCorner);
+                            TextView awayCartonJaune = (TextView) getView().findViewById(R.id.awayCartonJaune);
+                            TextView awayCartonRouge = (TextView) getView().findViewById(R.id.awayCartonRouge);
+                            TextView scorers = (TextView) getView().findViewById(R.id.scorers_text);
+                            ImageView scorersImage = (ImageView) getView().findViewById(R.id.scorers_icone);
+                            
                             JSONObject jObject = new JSONObject(response);
                             JSONObject data = jObject.getJSONObject("data");
                             String HometeamID = data.getJSONObject("home_team").getString("team_id");
@@ -167,14 +180,30 @@ public class Match_Fragment extends Fragment {
                                     }
                                 }
                             }
+                            else {
+                                scorers.setVisibility(View.INVISIBLE);
+                                scorersImage.setVisibility(View.INVISIBLE);
+                            }
                             HomeTeam.setText(data.getJSONObject("home_team").getString("name"));
                             AwayTeam.setText(data.getJSONObject("away_team").getString("name"));
                             HomeTeamFlag.setImageResource(ChooseFlag(data.getJSONObject("home_team").getString("name")));
                             AwayTeamFlag.setImageResource(ChooseFlag(data.getJSONObject("away_team").getString("name")));
+                            if (!data.isNull("match_statistics")){
+                                homeTir.setText(data.getJSONArray("match_statistics").getJSONObject(0).getString("goal_attempts"));
+                                homeTirCadre.setText(data.getJSONArray("match_statistics").getJSONObject(0).getString("goal_kick"));
+                                homeCorner.setText(data.getJSONArray("match_statistics").getJSONObject(0).getString("corners"));
+                                homeCartonJaune.setText(data.getJSONArray("match_statistics").getJSONObject(0).getString("yellowcards"));
+                                homeCartonRouge.setText(data.getJSONArray("match_statistics").getJSONObject(0).getString("redcards"));
+                                awayTir.setText(data.getJSONArray("match_statistics").getJSONObject(1).getString("goal_attempts"));
+                                awayTirCadre.setText(data.getJSONArray("match_statistics").getJSONObject(1).getString("goal_kick"));
+                                awayCorner.setText(data.getJSONArray("match_statistics").getJSONObject(1).getString("corners"));
+                                awayCartonJaune.setText(data.getJSONArray("match_statistics").getJSONObject(1).getString("yellowcards"));
+                                awayCartonRouge.setText(data.getJSONArray("match_statistics").getJSONObject(1).getString("redcards"));
+                            }
                             if ((data.getString("status").equals("notstarted"))) {
                                 Time.setText(data.getString("match_start"));
                                 Result.setText(" - ");
-                            } else if (data.getString("status").equals("finished")) {
+                            } else if (data.getString("status").equals("finished") || data.getString("status").equals("finished with pen.")) {
                                 Time.setText("TER");
                                 Result.setText(data.getJSONObject("stats").getString("ft_score"));
                             } else {
@@ -263,6 +292,22 @@ public class Match_Fragment extends Fragment {
                 return Flag[6];
             case "Serbia":
                 return Flag[27];
+            case "Colombia":
+                return Flag[32];
+            case "Panama":
+                return Flag[33];
+            case "Sweden":
+                return Flag[34];
+            case "Nigeria":
+                return Flag[35];
+            case "Peru":
+                return Flag[36];
+            case "Iceland":
+                return Flag[37];
+            case "Egypt":
+                return Flag[38];
+            case "Russia":
+                return Flag[39];
             default:
                 return R.drawable.ic_baseline_flag_24;
         }

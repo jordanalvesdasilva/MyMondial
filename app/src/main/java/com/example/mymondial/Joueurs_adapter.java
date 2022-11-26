@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,17 +17,15 @@ public class Joueurs_adapter extends BaseAdapter {
     ArrayList<String> Player_Name = new ArrayList<String>();
     ArrayList<String> Player_Stats = new ArrayList<String>();
     ArrayList<String> Player_Match = new ArrayList<String>();
-    ArrayList<Integer> Player_Flag = new ArrayList<Integer>();
 
     LayoutInflater inflater ;
 
-    public Joueurs_adapter(Context context, ArrayList<String> Player_Rang, ArrayList<String> Player_Name, ArrayList<String> Player_Stats, ArrayList<String> Player_Match, ArrayList<Integer> Player_Flag){
+    public Joueurs_adapter(Context context, ArrayList<String> Player_Rang, ArrayList<String> Player_Name, ArrayList<String> Player_Stats, ArrayList<String> Player_Match){
         this.context=context;
         this.Player_Rang=Player_Rang;
         this.Player_Name=Player_Name;
         this.Player_Stats=Player_Stats;
         this.Player_Match=Player_Match;
-        this.Player_Flag= Player_Flag;
         inflater = LayoutInflater.from(context);
 
     }
@@ -54,13 +51,11 @@ public class Joueurs_adapter extends BaseAdapter {
         TextView PlayerNameView = (TextView) convertView.findViewById(R.id.Player_Name);
         TextView PlayerStatsView = (TextView) convertView.findViewById(R.id.Player_Stats);
         TextView PlayerMatchView = (TextView) convertView.findViewById(R.id.Player_Match);
-        ImageView PlayerFlagView = (ImageView) convertView.findViewById(R.id.Player_Flag);
 
         PlayerRangView.setText(Player_Rang.get(position));
         PlayerNameView.setText(Player_Name.get(position));
         PlayerStatsView.setText(Player_Stats.get(position));
         PlayerMatchView.setText(Player_Match.get(position));
-        PlayerFlagView.setImageResource(Player_Flag.get(position));
 
         return convertView;
     }
