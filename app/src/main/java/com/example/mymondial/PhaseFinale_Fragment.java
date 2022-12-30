@@ -73,12 +73,13 @@ public class PhaseFinale_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate le layout pour ce fragment
         View inflate = (ViewGroup) inflater.inflate(R.layout.fragment_phase_finale_, null);
         RequetAPI(inflate);
         return inflate;
     }
 
+    // Requete de l'API et remplissage des tableaux
     private void RequetAPI(View inflate){
         // Huitièmes de finale
         ImageView HuitHome1 = (ImageView) inflate.findViewById(R.id.HuitHome1);
@@ -241,7 +242,7 @@ public class PhaseFinale_Fragment extends Fragment {
         queue.add(stringRequest);
     }
 
-
+    // Permet de lier le nom du pays a son drapeau
     public int ChooseFlag(String name_team){
         switch (name_team){
             case "Senegal":

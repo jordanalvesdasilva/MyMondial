@@ -28,6 +28,7 @@ import java.util.ArrayList;
  */
 public class Groupes_Fragment extends Fragment {
 
+    // Déclaration des attributs
     private ListView GroupesListview;
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -114,10 +115,11 @@ public class Groupes_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // Inflate le layout pour ce fragment
         View inflate = (ViewGroup) inflater.inflate(R.layout.fragment_groupes_, null);
 
 
-        // REQUEST API FOR MATCH
+        // Requete de l'API et remplissage des tableaux
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         GroupesListview = (ListView) inflate.findViewById(R.id.groupes_live);
         Groupes_adapter groupes_adapter = new Groupes_adapter(getActivity(), E1_flag, E1_name, E1_match_joue, E1_victoire, E1_defaite, E1_nul, E1_point,
@@ -229,6 +231,7 @@ public class Groupes_Fragment extends Fragment {
 
     }
 
+    // Vide les tableaux
     private void ResetVariables(){
         Groupe_name.clear();
         // EQUIPE 1 DU GROUPE
@@ -265,7 +268,7 @@ public class Groupes_Fragment extends Fragment {
         E4_point.clear();
     }
 
-
+    // Permet de lier le nom du pays a son drapeau
     public int ChooseFlag(String name_team){
         switch (name_team){
             case "Senegal":
@@ -352,6 +355,8 @@ public class Groupes_Fragment extends Fragment {
                 return R.drawable.ic_baseline_flag_24;
         }
     }
+
+    // Permet de lier l'IdPays au nom du pays
     private String IdPays (String Team_id){
         switch (Team_id){
             case "14220" :
@@ -443,6 +448,7 @@ public class Groupes_Fragment extends Fragment {
         }
     }
 
+    // Permet de lier l'IDGroupe au numéro de groupe
     private String IdGroupe(String numero){
         switch (numero){
             case "0":

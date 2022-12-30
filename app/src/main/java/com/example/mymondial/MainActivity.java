@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private GestureDetectorCompat gDetect;
 
     @Override
+    // Permet de naviguer de fragment en fragment en utilisant la navbar
     protected void onCreate(Bundle savedInstanceState) {
         directionsMap = new HashMap<>();
         directionsMap.put(DIRECTION_RIGHT, "right");
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         gDetect.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
-
+   // Remplace le fragment en place
     private void replaceFragment(Fragment fragment, String TAG){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    // Permet de lier les swipe à une action
     public class GestureListener extends GestureDetector.SimpleOnGestureListener {
         private float flingMin = 100;
         private float velocityMin = 100;

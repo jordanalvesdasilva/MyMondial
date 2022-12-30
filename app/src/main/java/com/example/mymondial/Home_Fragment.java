@@ -91,16 +91,15 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        // Inflate le layout pour ce fragment
         View inflate = (ViewGroup) inflater.inflate(R.layout.fragment_home_, null);
         Spinner spinner = inflate.findViewById(R.id.spinner);
+        // Ajout des adapter
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.journée, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-
-        // Inflate the layout for this fragment
         return inflate;
     }
 
@@ -188,8 +187,8 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
 
     }
 
+    // Requete de l'API et remplissage des tableaux
     private void RequetAPI(String current_day){
-        // REQUEST API FOR MATCH
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         MatchListview = (ListView) getView().findViewById(R.id.match_live);
         Match_adapter match_adapter = new Match_adapter(getActivity(), HomeTeam, AwayTeam, Score, Time, HomeTeamFlag, AwayTeamFlag, ID);
@@ -248,6 +247,7 @@ public class Home_Fragment extends Fragment implements AdapterView.OnItemSelecte
         queue.add(stringRequest);
     }
 
+    // Permet de lier le nom du pays a son drapeau
     public int ChooseFlag(String name_team){
         switch (name_team){
             case "Senegal":

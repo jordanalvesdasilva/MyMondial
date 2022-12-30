@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+// Adapter de la Listview de la page joueur
+// Permet d'adapter les différentes informations dans un item de la listview
 public class Joueurs_adapter extends BaseAdapter {
 
     Context context;

@@ -79,10 +79,10 @@ public class Joueurs_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate le layout pour ce fragment
 
         View inflate = (ViewGroup) inflater.inflate(R.layout.fragment_joueurs_, null);
-        // REQUEST API FOR MATCH
+        // Requete de l'API et remplissage des tableaux
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         JoueursListview = (ListView) inflate.findViewById(R.id.joueurs_live);
         Joueurs_adapter joueurs_adapter = new Joueurs_adapter(getActivity(), Player_Rang, Player_Name, Player_Stats, Player_Match);

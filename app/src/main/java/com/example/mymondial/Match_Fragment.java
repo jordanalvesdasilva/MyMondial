@@ -89,7 +89,7 @@ public class Match_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate le layout pour ce fragment
         View inflate = (ViewGroup) inflater.inflate(R.layout.fragment_match_, null);
 
         getParentFragmentManager().setFragmentResultListener("match_id", this, new FragmentResultListener() {
@@ -111,7 +111,7 @@ public class Match_Fragment extends Fragment {
         return inflate;
     }
 
-
+    // Requete de l'API et remplissage des tableaux
     private void RequetAPI(String match_id){
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         InfoListview = (ListView) getView().findViewById(R.id.info_listview);
@@ -226,6 +226,8 @@ public class Match_Fragment extends Fragment {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+
+    // Permet de lier le nom du pays a son drapeau
     public int ChooseFlag(String name_team){
         switch (name_team){
             case "Senegal":

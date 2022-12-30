@@ -12,6 +12,8 @@ public class FirstActivity extends AppCompatActivity {
     ImageButton russia;
     ImageButton qatar;
     @Override
+
+    // Permet de choisir si l'on souhaite observer la coupe du monde 2018 ou 2022 en modifiant la variable global years
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
